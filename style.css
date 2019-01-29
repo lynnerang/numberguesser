@@ -1,0 +1,104 @@
+/*Base style -------------------- */
+body {
+  background: #404042;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  color: #da548a;
+}
+
+/*main {
+  background: #d1d2d4;
+}*/
+
+/*Layout style -------------------- */
+
+.l-center-center {
+  align-content: center;
+  justify-content: center;
+}
+
+.l-col-1 {
+  grid-template-rows: 1fr;
+}
+
+.l-col-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.l-flex {
+  display: flex;
+  border: 1px solid red;
+}
+
+.l-flex-d-col {
+  flex-direction: column;
+}
+
+.l-grid {
+  display: grid;
+}
+
+.l-margin-auto {
+  margin: auto;
+}
+
+/*Module style -------------------- */
+
+.header-subheader {
+  color: white;
+  text-transform: uppercase;
+}
+
+.input {
+  background: #f5f6f8;
+}
+
+.output {
+  background: #d1d2d4;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+
+/*State style -------------------- */
+
+/*Theme style -------------------- */
+
+
+/*Testing -------------------- */
+
+.test {
+  height: 100px;
+  width: 100px;
+  background: red;
+  border: 1px solid red;
+  margin: auto;
+}
+
+.test2 {
+  height: 100px;
+  width: 100px;
+  background: blue;
+  border: 1px solid red;
+  margin: auto;
+}
+
+section {
+  width: 200px;
+}
+
+h1 {
+  border: 1px solid red;
+}
+
+p {
+  border: 1px solid red;
+}
+
+header {
+  height: 300px;
+}
