@@ -1,44 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Number Guesser</title>
-  <link rel="stylesheet" href="normalize.css">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="l-grid l-col-1 l-center-center">
-      <div class="l-flex l-flex-d-col l-center-center">
-        <h1 class="uppercase">Number<span>Guesser</span></h1>
-        <p class="l-margin-auto header-subheader">Ultimate Challenger Edition</p>
-    </div>
-  </header>
-  
-
-  <main class="l-grid l-col-2 l-center-center">
-    <section class="input l-margin-auto">
-      <article>
-        <div class="test2"></div>
-      </article>
-      <article>
+  <head>
+    <meta charset="UTF-8">
+    <title>Number Guesser</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,800" rel="stylesheet">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!-- Header with page title -->
+    <header>
+      <div class="header-text">
+        <h1><span class="fnt-x-bold">number</span>guesser</h1>
+        <!-- Need to figure out how to add horizontal rule -->
+        <p>ultimate challenger edition</p>
+      </div>
+    </header>
+    <!-- Main content -->
+    <main class="l-flex">
+      <!-- Div of left side of page -->
+      <div class="l-page-half left-page-half l-flex">
         
-      </article>
-      <article>
+
+        <section>
+          <div class="field flex-item">
+            <h2>Set Range</h2>
+            <label for="min">Min Range</label><input id="min">
+          </div>
+          <div class="field flex-item">
+            <label for="max">Max Range</label><input id="max">
+          </div>
+
+          <div class="flex-item"><button>Update</button></div>
+
+        </section>
         
-      </article>
 
+        <section>
+          <div class="field flex-item">
+            <p>The current range is 1 to 100</p>
+            <h2>Challenger 1</h2>
+            <label for="chal-1-name">Name</label><input id="chal-1-name">
+            <label for="chal-1-guess">Guess</label><input id="chal-1-name">
+          </div>
+          <h2>Challenger 1</h2>
+          <div class="field flex-item">
+            <label for="chal-2-name">Name</label><input id="chal-2-name">
+            <label for="chal-2-guess">Guess</label><input id="chal-2-guess">
+          </div>
+          <button>Submit Guess</button>
+          <button>Reset Game</button>
+          <button>Clear Game</button>
+        </section>
+       
 
-    </section>
+        <section>
+          <h2>Latest Score</h2>
+          <div class="chal-latest-score">
+            <h3>Challenger 1 Name</h3>
+            <p>current guess</p>
+            <p>97</p>
+            <p>that's too high</p>
+          </div>
+          <div class="chal-latest-score">
+            <h3>Challenger 2 Name</h3>
+            <p>current guess</p>
+            <p>3</p>
+            <p>that's too low</p>
+          </div>
+        </section>
 
-
-    <section class="output l-margin-auto">
-      <article>
-           <div class="test"></div>
-      </article>
-    </section>
-  </main>
-
-
-
-</body>
+      </div>
+      <!-- Div right side of page -->
+      <div class="l-page-half">
+        <section>
+          <p>challenger 1 name vs challenger 2 name</p>
+          <p>challenger 2 name</p>
+          <p>WINNER</p>
+          <p>47 guesses</p>
+          <p>1.35 minute</p>
+        </section>
+      </div>
+    </main>
+  </body>
 </html>
