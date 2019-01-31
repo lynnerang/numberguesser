@@ -27,35 +27,37 @@
           <div class="l-flex l-flex-a-e l-container l-flex-j-sb">
 
             <div class="l-flex-1 flex-content-margin">
-              <label for="min">Min Range</label>
-              <input class="input-field" type="number" id="min">
+              <label for="min-range">Min Range</label>
+              <input class="input-field" type="number" id="min-range">
             </div>
             
             <div class="l-flex-1 flex-content-margin">
-              <label for="max">Max Range</label>
-              <input class="input-field" type="number" id="max">
+              <label for="max-range">Max Range</label>
+              <input class="input-field" type="number" id="max-range">
             </div>
 
             <div class="l-flex-1 l-flex l-flex-j-c l-flex-a-c">
-              <button class="btn uppercase">Update</button>
+              <button class="btn uppercase" id="update-btn">Update</button>
             </div>
 
           </div>
         </section>
         
 <!-- Section for challengers -->
+<!-- Fix the span and JavaScript interaction -->
         <section class="card card-2-3 l-flex-3">
-          <p class="marg-b-20">The Current Range is <span class="underline fnt-x-bold fnt-range">1</span> to <span class="underline fnt-x-bold fnt-range">100</span></p>
+          <p class="marg-b-20 range-text">The Current Range is <span class="underline fnt-x-bold fnt-range">1</span> to <span class="underline fnt-x-bold fnt-range">100</span></p>
+          
           <h3>Challenger 1</h3>
           
             <div class="l-flex l-container marg-b-20">
              <div class="l-flex-2f flex-content-margin">
                 <label for="chal-2-name">Name</label>
-                <input class="input-field" type="text" id="chal-1-name">
+                <input pattern="[a-zA-Z0-9 ]+" class="input-field guess-form" type="text" id="chal-1-name">
              </div>
               <div class="l-flex-1">
                 <label for="chal-1-guess">Guess</label>
-                <input class="input-field" type="number" id="chal-1-name">
+                <input class="input-field guess-form" type="number" id="chal-1-guess">
               </div>
             </div>
 
@@ -64,20 +66,20 @@
             <div class="l-flex marg-b-20 l-container">
               <div class="l-flex-2f flex-content-margin">
                 <label for="chal-2-name">Name</label>
-                <input class="input-field" type="text" id="chal-2-name">
+                <input pattern="[a-zA-Z0-9 ]+" class="input-field guess-form" type="text" id="chal-2-name">
               </div>
 
               <div class="l-flex-1">
                 <label for="chal-2-guess">Guess</label>
-                <input class="input-field" type="number" id="chal-2-guess">
+                <input class="input-field guess-form" type="number" id="chal-2-guess">
               </div>
 
             </div>
 
             <div class="l-flex marg-b-20 l-container l-flex-a-e l-flex-j-sb">
-              <button class="btn uppercase l-flex-1">Submit Guess</button>
-              <button class="btn uppercase l-flex-1">Reset Game</button>
-              <button class="btn uppercase l-flex-1">Clear Game</button>
+              <button class="btn uppercase l-flex-1" id="guess-btn">Submit Guess</button>
+              <button class="btn uppercase l-flex-1" id="reset-btn">Reset Game</button>
+              <button class="btn uppercase l-flex-1" type="button" id="clear-btn">Clear Game</button>
             </div>
 
         </section>
@@ -89,16 +91,16 @@
           <div class="l-flex l-flex-j-center">
            
             <div class="latest-score l-flex-1">
-              <h4 class="marg-b-5">Challenger 1 Name</h4>
+              <h4 class="marg-b-5 chal-1-name-display">Challenger 1 Name</h4>
               <p class="fnt-light">current guess</p>
-              <p class="latest-score-num">97</p>
-              <p class="fnt-light fnt-hint">that's too high</p>
+              <p class="latest-score-num chal-1-guess-display">0</p>
+              <p class="fnt-light fnt-hint chal-1-high-low">that's too high</p>
             </div>
             <div class="latest-score l-flex-1">
-              <h4 class="marg-b-5">Challenger 2 Name</h4>
+              <h4 class="marg-b-5 chal-2-name-display">Challenger 2 Name</h4>
               <p class="fnt-light">current guess</p>
-              <p class="latest-score-num">3</p>
-              <p class="fnt-light fnt-hint">that's too low</p>
+              <p class="latest-score-num chal-2-guess-display">0</p>
+              <p class="fnt-light fnt-hint chal-2-high-low">that's too low</p>
             </div>
 
           </div>
