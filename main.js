@@ -73,24 +73,11 @@ function submitGuess(e) {
 }
 
 
-// Reset button disabled by default
+// One button that resets the game and generates a new random number
 var resetBtn = document.getElementById('reset-btn');
 
+// Reset button disabled by default
 resetBtn.disabled = true;
-
-
-
-// xxxxxxxx.addEventListener('',)
-
-
-
-
-
-
-
-
-
-
 
 
 
