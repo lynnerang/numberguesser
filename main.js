@@ -74,11 +74,11 @@ function highOrLow(guess, text) {
   }
 }
 
-// Reset button disabled by default
+// One button that resets the game and generates a new random number
 var resetBtn = document.getElementById('reset-btn');
 
+// Reset button disabled by default
 resetBtn.disabled = true;
-
 
 // Clear the inputs for challenger names and guesses
 var clearBtn = document.getElementById('clear-btn');
