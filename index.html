@@ -23,50 +23,59 @@
         
 
         <section>
-          <div class="field flex-item">
-            <h2>Set Range</h2>
-            <label for="min">Min Range</label><input id="min">
-          </div>
-          <div class="field flex-item">
-            <label for="max">Max Range</label><input id="max">
-          </div>
-
-          <div class="flex-item"><button>Update</button></div>
-
+          <h2>Set Range</h2>
+          <form>
+            <div class="field flex-item">
+              <label for="min-range">Min Range</label>
+              <input type="number" id="min-range">
+            </div>
+            <div class="field flex-item">
+              <label for="max-range">Max Range</label>
+              <input type="number" id="max-range">
+            </div>
+            <div class="flex-item">
+              <button id="update-btn">Update</button>
+            </div>
+          </form>
         </section>
         
-
         <section>
-          <div class="field flex-item">
-            <p>The current range is 1 to 100</p>
+          <p class="range-text">Enter a range above before submitting your guesses.</p>
+          <form class="guess-form">
             <h2>Challenger 1</h2>
-            <label for="chal-1-name">Name</label><input id="chal-1-name">
-            <label for="chal-1-guess">Guess</label><input id="chal-1-name">
-          </div>
-          <h2>Challenger 1</h2>
-          <div class="field flex-item">
-            <label for="chal-2-name">Name</label><input id="chal-2-name">
-            <label for="chal-2-guess">Guess</label><input id="chal-2-guess">
-          </div>
-          <button>Submit Guess</button>
-          <button>Reset Game</button>
-          <button>Clear Game</button>
+              <div class="field flex-item">
+                <label for="chal-1-name">Name</label>
+                <input pattern="[a-zA-Z0-9 ]+" id="chal-1-name">
+                <label for="chal-1-guess">Guess</label>
+                <input type="number" id="chal-1-guess">
+              </div>
+            <h2>Challenger 1</h2>
+            <div class="field flex-item">
+              <label for="chal-2-name">Name</label>
+              <input pattern="[a-zA-Z0-9 ]+" id="chal-2-name">
+              <label for="chal-2-guess">Guess</label>
+              <input type="number" id="chal-2-guess">
+            </div>
+            <button type="button" id="guess-btn">Submit Guess</button>
+            <button>Reset Game</button>
+            <button type="button" id="clear-btn">Clear Game</button>
+          </form>
         </section>
        
 
         <section>
           <h2>Latest Score</h2>
           <div class="chal-latest-score">
-            <h3>Challenger 1 Name</h3>
+            <h3 class="chal-1-name-display">Challenger 1 Name</h3>
             <p>current guess</p>
-            <p>97</p>
-            <p>that's too high</p>
+            <p class="chal-1-guess-display">0</p>
+            <p class="chal-1-high-low">whathwaaat</p>
           </div>
           <div class="chal-latest-score">
-            <h3>Challenger 2 Name</h3>
+            <h3 class="chal-2-name-display">Challenger 2 Name</h3>
             <p>current guess</p>
-            <p>3</p>
-            <p>that's too low</p>
+            <p class="chal-2-guess-display">0</p>
+            <p class="chal-2-high-low">whatwhathwat</p>
           </div>
         </section>
 
@@ -82,5 +91,6 @@
         </section>
       </div>
     </main>
+    <script type="text/javascript" src="main.js"></script>
   </body>
 </html>
