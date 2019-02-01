@@ -9,8 +9,8 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   height: 100%;
+  width: 100%;
   margin: auto;
-  max-width: 1280px;
 }
 
 h1 {
@@ -32,6 +32,7 @@ h4 {
   color: #727379;
   letter-spacing: .03em;
   font-weight: 600;
+  font-size: 18px;
 }
 
 header {
@@ -100,6 +101,10 @@ main {
   justify-content: center;
 }
 
+.l-flex-j-sa {
+  justify-content: space-around;
+}
+
 .l-flex-j-sb {
   justify-content: space-between;
 }
@@ -162,6 +167,31 @@ main {
   padding-bottom: 10px;
 }
 
+.center {
+  text-align: center;
+}
+
+.close-x-btn-div {
+ width: 25px;
+ height: 25px;
+ background: #7f7f7f;
+ border-radius: 100%;
+ color: #d1d2d4;
+ font-size: 1.4em;
+ position: relative;
+ margin: 0;
+ padding: 0;
+}
+
+.close-x-btn-x {
+ margin: 0;
+ padding: 0;
+ position: absolute;
+ top: 45%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+}
+
 .flex-content-margin {
   margin: 0 20px 0 0;
 }
@@ -180,6 +210,10 @@ main {
 
 .fnt-range {
   color: #525252;
+}
+
+.guess-count p {
+  padding-top: 15px;
 }
 
 .header-span {
@@ -210,6 +244,7 @@ main {
 
 .latest-score {
   text-align: center;
+  padding-bottom: 20px;
 }
 
 .latest-score-num {
@@ -234,6 +269,10 @@ main {
   background: #d1d2d4;
 }
 
+.right-align {
+  text-align: right;
+}
+
 .subheader {
   color: #ffffff;
   font-size: 1.4em;
@@ -248,6 +287,38 @@ main {
   text-transform: uppercase;
 }
 
+.vs {
+  padding-bottom: 15px;
+}
+
+.vs-chal {
+  font-size: 18px;
+  font-weight: 700;
+  padding-bottom: 15px;
+}
+
+.winner-card {
+  background-color: white;
+  padding: 20px;
+  margin: 20px 40px;
+  border: solid 2px #aaaaaa;
+}
+
+.winner-chal-name {
+  font-weight: 700;
+}
+
+.winner-text {
+  font-size: 35px;
+  text-align: center;
+  padding: 25px 0px;
+  border-top: solid 2px #eaeaea;
+  border-bottom: solid 2px #eaeaea;
+}
+
+/** {
+  border: solid 1px red;
+}*/
 
 /*State style -------------------- */
 
