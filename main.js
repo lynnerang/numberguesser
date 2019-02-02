@@ -19,7 +19,8 @@ function setRange(e) {
   max = document.getElementById('max-range').value;
 
   // Sets range text to entries
-  document.querySelector('.range-text').innerText = "The current range is " + min + " to " + max;
+  document.querySelector('.min-range-txt').innerText = min;
+  document.querySelector('.max-range-txt').innerText = max;
 
   setRandom(min, max);
 
@@ -91,7 +92,7 @@ clearBtn.disabled = true;
 // Listens for whether user enters text into guess form
 for (var i = 0; i < guessInputs.length; i++){
   guessInputs[i].addEventListener('input', function() {
-
+    // if (guessInputs.forEach(input) = "") {}
   // !!!ADD if statement that checks if ALL fields are empty, then clear.  if not, dont disable.
   clearBtn.disabled = false;
   });
@@ -106,3 +107,19 @@ function clearFields(e) {
 
     clearBtn.disabled = true;
 }
+
+
+// Add cards to output
+var cardTemplate = document.querySelector('.output');
+
+// Function to display the card
+function displayCard () {
+  document.body.appendChild(cardTemplate.content.cloneNode(true));
+};
+
+displayCard();
+displayCard();
+displayCard();
+
+
+

@@ -46,7 +46,7 @@
 <!-- Section for challengers -->
 <!-- Fix the span and JavaScript interaction -->
         <section class="card card-2-3 l-flex-3">
-          <p class="marg-b-20 range-text">The Current Range is <span class="underline fnt-x-bold fnt-range">1</span> to <span class="underline fnt-x-bold fnt-range">100</span></p>
+          <p class="marg-b-20 range-text">The Current Range is <span class="underline fnt-x-bold fnt-range min-range-txt">1</span> to <span class="underline fnt-x-bold fnt-range max-range-txt">100</span></p>
           
           <h3>Challenger 1</h3>
           
@@ -108,15 +108,24 @@
       </div>
 
 <!-- Div right side of page (output) -->
-      <div class="output l-flex l-flex-dir l-flex-1">
-        <section>
-          <p>challenger 1 name vs challenger 2 name</p>
-          <p>challenger 2 name</p>
-          <p>WINNER</p>
-          <p>47 guesses</p>
-          <p>1.35 minute</p>
+      <template class="output l-flex l-flex-dir l-flex-1">
+        <section class="l-flex l-flex-dir winner-card">
+          <div class="l-flex l-flex-j-sa">
+            <p class="chal-1-name vs-chal-1 vs-chal uppercase">challenger 1 name</p>
+            <p class="vs">vs</p>
+            <p class="chal-2-name vs-chal-2 vs-chal uppercase">challenger 2 name</p>
+          </div>
+          <div class="winner-text uppercase">
+            <p class="winner-chal-name">challenger 2 name</p>
+            <p class="fnt-light">WINNER</p>
+          </div>
+          <div class="l-flex l-flex-j-sb guess-count">
+            <p class="l-flex-1 fnt-light uppercase"><span class="fnt-x-bold">47</span> guesses</p>
+            <p class="l-flex-1 center fnt-light uppercase"><span class="fnt-x-bold">1.35</span> minutes</p>
+            <p class="l-flex-1 right-align"></p>
+          </div>
         </section>
-      </div>
+      </template>
     </main>
 <!-- Link to JavaScript -->
   <script src="main.js"></script>
