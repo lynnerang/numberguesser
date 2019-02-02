@@ -37,7 +37,15 @@ h4 {
 
 header {
   background: #404042;
-  height: 18vh;
+  height: 22vh;
+}
+
+i {
+  font-size: 22px;
+}
+
+i:hover {
+  color: #d9548a;
 }
 
 p {
@@ -133,15 +141,19 @@ main {
   font-family: 'Open Sans', sans-serif;
   font-size: 1em;
   font-weight: 600;
-  height: 32px;
-  margin: 0 3px 2px 3px;
+  height: 34px;
+  margin: 0 10px 2px 10px;
   padding: 0 3px;
   text-align: center;
   width: 94%;
 }
 
+.btn:hover {
+  background-color: #d9548a;
+}
+
 .btn:disabled {
-  background-color: #d1d2d4;
+  background-color: #d0d2d3;
 }
 
 .btn-padding {
@@ -213,7 +225,7 @@ main {
 }
 
 .guess-count p {
-  padding-top: 15px;
+  padding: 10px 10px 0px 10px;
 }
 
 .header-span {
@@ -277,6 +289,30 @@ main {
   color: #ffffff;
   font-size: 1.4em;
   font-weight: 300;
+  overflow: hidden;
+  padding-bottom: 10px;
+  text-align: center;
+  width: 545px;
+}
+
+.subheader:before,
+.subheader:after {
+ background-color: white;
+ content: "";
+ display: inline-block;
+ height: 1px;
+ position: relative;
+ vertical-align: middle;
+ width: 50%;
+}
+
+.subheader:before {
+ right: 0.5em;
+ margin-left: -50%;
+}
+.subheader:after {
+ left: 0.5em;
+ margin-right: -50%;
 }
 
 .underline {

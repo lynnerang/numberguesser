@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Number Guesser</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="style.css">
   </head>
@@ -11,9 +13,9 @@
 <!-- Header with page title -->
     <header class="l-flex l-flex-dir l-header uppercase">
       
-      <h1><span class="fnt-x-bold">number</span>guesser</h1>
+      <h1 class="animated bounceInDown"><span class="fnt-x-bold">number</span>guesser</h1>
 <!-- Need to figure out how to add horizontal rule -->
-        <p class="subheader">ultimate challenger edition</p>
+        <p class="animated bounceInDown subheader">ultimate challenger edition</p>
     </header>
 <!-- Main content -->
     <main class="l-flex">
@@ -108,8 +110,8 @@
       </div>
 
 <!-- Div right side of page (output) -->
-      <template class="output l-flex l-flex-dir l-flex-1">
-        <section class="l-flex l-flex-dir winner-card">
+      <div class="output l-flex l-flex-dir l-flex-1">
+        <section class="l-flex l-flex-dir winner-card animated flash">
           <div class="l-flex l-flex-j-sa">
             <p class="chal-1-name vs-chal-1 vs-chal uppercase">challenger 1 name</p>
             <p class="vs">vs</p>
@@ -119,13 +121,13 @@
             <p class="winner-chal-name">challenger 2 name</p>
             <p class="fnt-light">WINNER</p>
           </div>
-          <div class="l-flex l-flex-j-sb guess-count">
+          <div class="l-flex l-flex-j-sb l-flex-a-e guess-count">
             <p class="l-flex-1 fnt-light uppercase"><span class="fnt-x-bold">47</span> guesses</p>
             <p class="l-flex-1 center fnt-light uppercase"><span class="fnt-x-bold">1.35</span> minutes</p>
-            <p class="l-flex-1 right-align"></p>
+            <p class="l-flex-1 right-align"><i class="fas fa-times-circle"></i></p>
           </div>
         </section>
-      </template>
+      </div>
     </main>
 <!-- Link to JavaScript -->
   <script src="main.js"></script>
