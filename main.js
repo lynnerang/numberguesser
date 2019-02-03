@@ -74,6 +74,7 @@ updateBtn.addEventListener('click', setRange);
 function setRange(e) {
   e.preventDefault();
 
+  console.log('first setrange results ' + min.value + " and " + max.value);
   min = parseInt(min.value);
   max = parseInt(max.value);
 
