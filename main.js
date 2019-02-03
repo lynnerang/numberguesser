@@ -21,8 +21,11 @@ var chal1GuessText = document.querySelector('.chal-1-guess-display');
 var chal2GuessText = document.querySelector('.chal-2-guess-display');
 var chal1HighLowText = document.querySelector('.chal-1-high-low');
 var chal2HighLowText = document.querySelector('.chal-2-high-low');
-var winnerText = "You guessed right!";
+var winnerText = 'You guessed right!';
 var winnerName;
+
+// Setting variable for card output side
+var cardTemplate = document.querySelector('.output');
 
 // Array for blocking invalid chars from number input
 var invalidChars = [
@@ -30,7 +33,6 @@ var invalidChars = [
   "+",
   "e",
 ];
-
 
 // Start default game on page load
 setRandom(1, 100);
@@ -97,7 +99,7 @@ function setRange(e) {
   console.log(randomNum + 'in end of set range');
 }
 
-// Function to submit & record player info and guesses
+// Function to submit and record player info and guesses
 var guessBtn = document.getElementById('guess-btn');
 
 guessBtn.addEventListener('click', submitGuess);
@@ -110,24 +112,40 @@ function submitGuess(e) {
   chal1NameText.innerText = chalName1.value;
   chal2NameText.innerText = chalName2.value;
   
+  checksMinMaxGuess(chalGuess1.value, chalGuess2.value);
+
   highOrLow(chalGuess1.value, chal1HighLowText);
   highOrLow(chalGuess2.value, chal2HighLowText);
 
   checkForWinner(chalGuess1.value, chalGuess2.value);
 
+  togglesErrorChalNames();
+
   resetBtn.disabled = false;
 }
 
+// Function to check it guesses are within min/max
+function checksMinMaxGuess(chal1guess, chal2guess) {
+  if((chal1guess < min || chal1guess > max) && (chal2guess < min || chal2guess > max)) {
+    alert('Submitted guesses are outside of defined range');
+  } else if (chal1guess < min || chal1guess > max) {
+    alert('Submitted guess chal1 outside of defined range');
+  } else if (chal2guess < min || chal2guess > max) {
+    alert('Submitted guess chal2 outside of defined range');
+  }
+}
+
+// Function checks for winner
 function checkForWinner(guess1, guess2) {
     if (guess1 == randomNum && guess2 == randomNum) {
-    alert("It's a tie!  Play again.");
+    alert("It's a tie! Play again.");
      //!!!add reset game
   } else if (guess1 == randomNum && guess2 != randomNum) {
-    gameWon();
     winnerName = chalName1.value;
-  } else if (guess1 != randomNum && guess2 == randomNum) {
     gameWon();
+  } else if (guess1 != randomNum && guess2 == randomNum) {
     winnerName = chalName2.value;
+    gameWon();
   } else {
     chalGuess1.value = "";
     chalGuess2.value = "";
@@ -187,16 +205,30 @@ function clearFields(e) {
     clearBtn.disabled = true;
 }
 
-
-// Add cards to output
-var cardTemplate = document.querySelector('.output');
-
 // Function to display the card
 function gameWon() {
-  //document.body.appendChild(cardTemplate.content.cloneNode(true));
+var htmlText = `<section class="l-flex l-flex-dir winner-card">
+          <div class="l-flex l-flex-j-sa">
+            <p class="chal-1-name vs-chal-1 vs-chal uppercase">${chalName1.value}</p>
+            <p class="vs">vs</p>
+            <p class="chal-2-name vs-chal-2 vs-chal uppercase">${chalName2.value}</p>
+          </div>
+          <div class="winner-text uppercase">
+            <p class="winner-chal-name">${winnerName}</p>
+            <p class="fnt-light">WINNER</p>
+          </div>
+          <div class="l-flex l-flex-j-sb l-flex-a-e guess-count">
+            <p class="l-flex-1 fnt-light uppercase"><span class="fnt-x-bold">${guessCount * 2}</span> guesses</p>
+            <p class="l-flex-1 center fnt-light uppercase"><span class="fnt-x-bold">1.35</span> minutes</p>
+            <p class="l-flex-1 right-align"><i class="fas fa-times-circle"></i></p>
+          </div>
+        </section>`;
+  cardTemplate.innerHTML += htmlText;
+};
+
 
   //Stop the timer
-  end();
+  // end();
 
   // Ok to go negative?
   // max = max + 10;
@@ -204,29 +236,49 @@ function gameWon() {
   // setRandom(min, max);
 
   //reset game
-};
 
 
-// var htmlText = [
-// '<section class="l-flex l-flex-dir winner-card">',
-//   '<div class="l-flex l-flex-j-sa">',
-//     '<p class="chal-1-name vs-chal-1 vs-chal uppercase">'${chalName1}'</p>',
-//     '<p class="vs">vs</p>',
-//     '<p class="chal-2-name vs-chal-2 vs-chal uppercase">'${chalName2}'</p>',
-//   '</div>',
-//   '<div class="winner-text uppercase">',
-//     '<p class="winner-chal-name">'${winnerName}'</p>',
-//     '<p class="fnt-light">WINNER</p>',
-//   '</div>',
-//   '<div class="l-flex l-flex-j-sb guess-count">',
-//     '<p class="l-flex-1 fnt-light uppercase"><span class="fnt-x-bold">47</span>'${guessCount * 2}' guesses</p>',
-//     '<p class="l-flex-1 center fnt-light uppercase"><span class="fnt-x-bold">'${endTimer.getSeconds()}'</span> minutes</p>',
-//     '<p class="l-flex-1 right-align"></p>',
-//   '</div>',
-// '</section>'
-// ];
+// Error messages
 
-// console.log(htmlText);
+// Error message for challenger names
+var errorDivName1 = document.querySelector('.error-c1n');
+var errorDivName2 = document.querySelector('.error-c2n');
+
+function togglesErrorChalNames (){
+  if(chalName1.value == "") {
+    errorDivName1.classList.toggle('error-c1n');
+    chalName1.classList.add('error-border');
+    guessBtn.disabled = true;
+  } else if (chalName2.value == "") {
+    errorDivName2.classList.toggle('error-c2n');
+    chalName2.classList.add('error-border');
+    guessBtn.disabled = true;
+  }
+}
+
+chalName1.addEventListener('keyup', removesErrorChalNames);
+chalName2.addEventListener('keyup', removesErrorChalNames);
+
+function removesErrorChalNames() {
+  if(chalName1.value !== "") {
+    errorDivName1.classList.toggle('error-c1n');
+    chalName1.classList.remove('error-border');
+    guessBtn.disabled = false;
+  } else if (chalName2.value !== "") {
+    errorDivName2.classList.toggle('error-c2n');
+    chalName2.classList.remove('error-border');
+    guessBtn.disabled = false;
+  }
+}
+
+// If name or guess is blank, then should not be able to submit guess
+
+// If chal1name blank and
+// If chal2name blank and
+// If guess1 blank and
+// If guess2 blank
+
+
 
 
 

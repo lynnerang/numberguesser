@@ -204,6 +204,26 @@ main {
  transform: translate(-50%, -50%);
 }
 
+.error-c1n {
+  visibility: hidden;
+}
+
+.error-c2n {
+  visibility: hidden;
+}
+
+.error-t {
+  color: #d9548a;
+  display: inline-block;
+  font-size: 0.8em;
+}
+
+.error-i {
+  display: inline-block;
+  color: #d9548a;
+  font-size: 0.7em;
+}
+
 .flex-content-margin {
   margin: 0 20px 0 0;
 }
@@ -257,6 +277,10 @@ main {
 .latest-score {
   text-align: center;
   padding-bottom: 20px;
+}
+
+.error-border {
+  border: 2px solid #d9548a;
 }
 
 .latest-score-num {
@@ -357,6 +381,10 @@ main {
 }*/
 
 /*State style -------------------- */
+
+.btn:focus {
+  outline: none;
+}
 
 .input-field:focus {
   outline: none;
