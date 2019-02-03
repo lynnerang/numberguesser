@@ -1,18 +1,22 @@
 //Setting variables for range and random number
 var randomNum;
-var min = document.getElementById('min-range');
-var max = document.getElementById('max-range');
+var minEl = document.getElementById('min-range');
+var maxEl = document.getElementById('max-range');
+var minInt;
+var maxInt;
 var guessCount = 1;  //To log the first time before checkWinner fn is run that adds to it
 var startTime;
 var minutes;
 
 //Setting reusable variables for Challenger names and guesses from inputs
-var chalName1 = document.getElementById('chal-1-name');
-var chalGuess1 = document.getElementById('chal-1-guess');
-var chalName2 = document.getElementById('chal-2-name');
-var chalGuess2 = document.getElementById('chal-2-guess');
-var guessInputs = [chalName1, chalGuess1, chalName2, chalGuess2];
-var numInputs = [chalGuess1, chalGuess2, min, max];
+var chal1NameEl = document.getElementById('chal-1-name');
+var chal1GuessEl = document.getElementById('chal-1-guess');
+var chal2NameEl = document.getElementById('chal-2-name');
+var chal2GuessEl = document.getElementById('chal-2-guess');
+var chal1GuessInt;
+var chal2GuessInt;
+var guessInputsEl = [chal1NameEl, chal1GuessEl, chal2NameEl, chal2GuessEl];
+var numInputsEl = [chal1GuessEl, chal2GuessEl, minEl, maxEl];
 
 // Setting variables for text to update
 var chal1NameText = document.querySelector('.chal-1-name-display');
@@ -23,6 +27,9 @@ var chal1HighLowText = document.querySelector('.chal-1-high-low');
 var chal2HighLowText = document.querySelector('.chal-2-high-low');
 var winnerText = 'You guessed right!';
 var winnerName;
+
+// One button that resets the game and generates a new random number
+var resetBtn = document.getElementById('reset-btn');
 
 // Setting variable for card output side
 var cardTemplate = document.querySelector('.output');
@@ -35,10 +42,7 @@ var invalidChars = [
 ];
 
 // Start default game on page load
-setRandom(1, 100);
-
-console.log(min.value + max.value);
-console.log(randomNum);
+startNewGame(1, 100);
 
 // Game timer functions
 function start() {
@@ -58,67 +62,62 @@ function end() {
 
 // Starts new game and generates random number within the range
 function setRandom(minimum, maximum) {
-    // min = Math.ceil(min);
-    // max = Math.floor(max);
-    console.log("Set random " + minimum + "and" + maximum);
     randomNum = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
-    guessCount = 1;
-    console.log(randomNum + " in set random");
-    start();
-    //try this later Math.floor(Math.random() * 3 + 1)
   }
 
 // Function to set range
 var updateBtn = document.getElementById('update-btn');
 
-updateBtn.addEventListener('click', setRange);
+updateBtn.addEventListener('click', onSetRange);
 
-function setRange(e) {
-  e.preventDefault();
-
-  console.log('first setrange results ' + min.value + " and " + max.value);
-  min = parseInt(min.value);
-  max = parseInt(max.value);
-
-  console.log("min max in beginning of setrange" + min + max);
+function startNewGame(minInt, maxInt) {
   
-  if (min >= max) {
+  if (minInt >= maxInt) {
     alert('Must have higher maximum than minimum!');
   } else {
     // Sets range text to entries
-    document.querySelector('.min-range-txt').innerText = min;
-    document.querySelector('.max-range-txt').innerText = max;
+    document.querySelector('.min-range-txt').innerText = minInt;
+    document.querySelector('.max-range-txt').innerText = maxInt;
 
-    console.log("minimum " + min + " and maximum " + max);
-
-    setRandom(min, max);
+    setRandom(minInt, maxInt);
 
     // Restart timer
     start();
+    guessCount = 1;
   }
   resetBtn.disabled = false;
-  console.log(randomNum + 'in end of set range');
+}
+
+function onSetRange(e) {
+  e.preventDefault();
+  minInt = parseInt(minEl.value);
+  maxInt = parseInt(maxEl.value);
+
+  startNewGame(minInt, maxInt);
 }
 
 // Function to submit and record player info and guesses
 var guessBtn = document.getElementById('guess-btn');
 
-guessBtn.addEventListener('click', submitGuess);
+guessBtn.addEventListener('click', onSubmitGuess);
 
-function submitGuess(e) {
+function onSubmitGuess(e) {
   e.preventDefault();
 
-  chal1GuessText.innerText = chalGuess1.value;
-  chal2GuessText.innerText = chalGuess2.value;
-  chal1NameText.innerText = chalName1.value;
-  chal2NameText.innerText = chalName2.value;
+  chal1GuessInt = parseInt(chal1GuessEl.value);
+  chal2GuessInt = parseInt(chal2GuessEl.value);
+
+  chal1GuessText.innerText = chal1GuessEl.value;
+  chal2GuessText.innerText = chal2GuessEl.value;
+  chal1NameText.innerText = chal1NameEl.value;
+  chal2NameText.innerText = chal2NameEl.value;
   
-  checksMinMaxGuess(chalGuess1.value, chalGuess2.value);
+  checksMinMaxGuess(chal1GuessInt, chal2GuessInt);
 
-  highOrLow(chalGuess1.value, chal1HighLowText);
-  highOrLow(chalGuess2.value, chal2HighLowText);
+  highOrLow(chal1GuessInt, chal1HighLowText);
+  highOrLow(chal2GuessInt, chal2HighLowText);
 
-  checkForWinner(chalGuess1.value, chalGuess2.value);
+  checkForWinner(chal1GuessInt, chal2GuessInt);
 
   togglesErrorChalNames();
 
@@ -126,12 +125,12 @@ function submitGuess(e) {
 }
 
 // Function to check it guesses are within min/max
-function checksMinMaxGuess(chal1guess, chal2guess) {
-  if((chal1guess < min || chal1guess > max) && (chal2guess < min || chal2guess > max)) {
+function checksMinMaxGuess(chal1Guess, chal2Guess) {
+  if((chal1Guess < minInt || chal1Guess > maxInt) && (chal2Guess < minInt || chal2Guess > maxInt)) {
     alert('Submitted guesses are outside of defined range');
-  } else if (chal1guess < min || chal1guess > max) {
+  } else if (chal1Guess < minInt || chal1Guess > maxInt) {
     alert('Submitted guess chal1 outside of defined range');
-  } else if (chal2guess < min || chal2guess > max) {
+  } else if (chal2Guess < minInt || chal2Guess > maxInt) {
     alert('Submitted guess chal2 outside of defined range');
   }
 }
@@ -142,14 +141,14 @@ function checkForWinner(guess1, guess2) {
     alert("It's a tie! Play again.");
      //!!!add reset game
   } else if (guess1 == randomNum && guess2 != randomNum) {
-    winnerName = chalName1.value;
+    winnerName = chal1NameEl.value;
     gameWon();
   } else if (guess1 != randomNum && guess2 == randomNum) {
-    winnerName = chalName2.value;
+    winnerName = chal2NameEl.value;
     gameWon();
   } else {
-    chalGuess1.value = "";
-    chalGuess2.value = "";
+    chal1GuessEl.value = "";
+    chal2GuessEl.value = "";
     guessCount++;
   }
 }
@@ -167,8 +166,7 @@ function highOrLow(guess, text) {
   }
 }
 
-// One button that resets the game and generates a new random number
-var resetBtn = document.getElementById('reset-btn');
+
 
 // Reset button disabled by default
 resetBtn.disabled = true;
@@ -176,32 +174,32 @@ resetBtn.disabled = true;
 // Clear the inputs for challenger names and guesses
 var clearBtn = document.getElementById('clear-btn');
 
-clearBtn.addEventListener('click', clearFields);
+clearBtn.addEventListener('click', onClearFields);
 
 clearBtn.disabled = true;
 
 
 // Listens for whether user enters text into guess form
-for (var i = 0; i < guessInputs.length; i++){
-  guessInputs[i].addEventListener('keyup', function(){
-    var emptyInputs = guessInputs.every(function(input) { return !input.value; });
+for (var i = 0; i < guessInputsEl.length; i++){
+  guessInputsEl[i].addEventListener('keyup', function(){
+    var emptyInputs = guessInputsEl.every(function(input) { return !input.value; });
     clearBtn.disabled = emptyInputs;
   });
 }
 
 // Listens for whether user tries to type invalid chars into number fields
-for (var i = 0; i < numInputs.length; i++){
-  numInputs[i].addEventListener('keydown', function(e) {
+for (var i = 0; i < numInputsEl.length; i++){
+  numInputsEl[i].addEventListener('keydown', function(e) {
     if (invalidChars.includes(e.key)) {
       e.preventDefault();
     }
   });
 }
 
-function clearFields(e) {
+function onClearFields(e) {
     e.preventDefault();
-    for (var i = 0; i < guessInputs.length; i++) {
-      guessInputs[i].value = "";
+    for (var i = 0; i < guessInputsEl.length; i++) {
+      guessInputsEl[i].value = "";
     }
     clearBtn.disabled = true;
 }
@@ -210,9 +208,9 @@ function clearFields(e) {
 function gameWon() {
 var htmlText = `<section class="l-flex l-flex-dir winner-card">
           <div class="l-flex l-flex-j-sa">
-            <p class="chal-1-name vs-chal-1 vs-chal uppercase">${chalName1.value}</p>
+            <p class="chal-1-name vs-chal-1 vs-chal uppercase">${chal1NameEl.value}</p>
             <p class="vs">vs</p>
-            <p class="chal-2-name vs-chal-2 vs-chal uppercase">${chalName2.value}</p>
+            <p class="chal-2-name vs-chal-2 vs-chal uppercase">${chal2NameEl.value}</p>
           </div>
           <div class="winner-text uppercase">
             <p class="winner-chal-name">${winnerName}</p>
@@ -246,28 +244,30 @@ var errorDivName1 = document.querySelector('.error-c1n');
 var errorDivName2 = document.querySelector('.error-c2n');
 
 function togglesErrorChalNames (){
-  if(chalName1.value == "") {
+  if(chal1NameEl.value == "") {
     errorDivName1.classList.toggle('error-c1n');
-    chalName1.classList.add('error-border');
+    cha1lNameEl.classList.add('error-border');
     guessBtn.disabled = true;
-  } else if (chalName2.value == "") {
+  } else if (chal2NameEl.value == "") {
     errorDivName2.classList.toggle('error-c2n');
-    chalName2.classList.add('error-border');
+    chal2NameEl.classList.add('error-border');
     guessBtn.disabled = true;
   }
 }
 
-chalName1.addEventListener('keyup', removesErrorChalNames);
-chalName2.addEventListener('keyup', removesErrorChalNames);
+console.log(randomNum);
+
+chal1NameEl.addEventListener('keyup', removesErrorChalNames);
+chal2NameEl.addEventListener('keyup', removesErrorChalNames);
 
 function removesErrorChalNames() {
-  if(chalName1.value !== "") {
+  if(chal1NameEl.value !== "") {
     errorDivName1.classList.toggle('error-c1n');
-    chalName1.classList.remove('error-border');
+    chal1NameEl.classList.remove('error-border');
     guessBtn.disabled = false;
-  } else if (chalName2.value !== "") {
+  } else if (chal2NameEl.value !== "") {
     errorDivName2.classList.toggle('error-c2n');
-    chalName2.classList.remove('error-border');
+    chal2NameEl.classList.remove('error-border');
     guessBtn.disabled = false;
   }
 }
