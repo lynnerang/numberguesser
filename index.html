@@ -8,11 +8,11 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   </head>
   <body>
 <!-- Header with page title -->
-    <header class="l-flex l-flex-dir l-header uppercase">
-      
+    <header class="l-flex l-flex-dir l-header uppercase">  
       <h1 class="animated bounceInDown"><span class="fnt-x-bold">number</span>guesser</h1>
 <!-- Need to figure out how to add horizontal rule -->
         <p class="animated bounceInDown subheader">ultimate challenger edition</p>
@@ -21,77 +21,73 @@
     <main class="l-flex">
 <!-- Div of left side of page (input) -->
       <div class="input l-flex l-flex-dir l-flex-1">
-        
 <!-- Section for set range -->
         <section class="card card-1 l-flex-1">
           <h3 class="block">Set Range</h3>
-         
           <div class="l-flex l-flex-a-e l-container l-flex-j-sb">
-
             <div class="l-flex-1 flex-content-margin">
               <label for="min-range">Min Range</label>
               <input class="input-field" type="number" id="min-range">
             </div>
-            
             <div class="l-flex-1 flex-content-margin">
               <label for="max-range">Max Range</label>
               <input class="input-field" type="number" id="max-range">
             </div>
-
             <div class="l-flex-1 l-flex l-flex-j-c l-flex-a-c">
               <button class="btn uppercase" id="update-btn">Update</button>
             </div>
-
           </div>
         </section>
-        
 <!-- Section for challengers -->
-<!-- Fix the span and JavaScript interaction -->
         <section class="card card-2-3 l-flex-3">
           <p class="marg-b-20 range-text">The Current Range is <span class="underline fnt-x-bold fnt-range min-range-txt">1</span> to <span class="underline fnt-x-bold fnt-range max-range-txt">100</span></p>
-          
+<!-- Challenger 1 -->
           <h3>Challenger 1</h3>
-          
             <div class="l-flex l-container marg-b-20">
              <div class="l-flex-2f flex-content-margin">
-                <label for="chal-2-name">Name</label>
+                <label for="chal-1-name">Name</label>
                 <input pattern="[a-zA-Z0-9 ]+" class="input-field guess-form" type="text" id="chal-1-name">
+<!-- Challenger 1 name error-->
+               <div class="error-c1n">
+                  <i class="fas fa-exclamation-triangle error-i"></i>
+                  <p class="error-t">Enter a name</p>
+               </div>
              </div>
+<!-- Challenger 1 guess -->
               <div class="l-flex-1">
                 <label for="chal-1-guess">Guess</label>
                 <input class="input-field guess-form" type="number" id="chal-1-guess">
               </div>
             </div>
-
+<!-- Challenger 2 -->
           <h3>Challenger 2</h3>
-            
             <div class="l-flex marg-b-20 l-container">
               <div class="l-flex-2f flex-content-margin">
                 <label for="chal-2-name">Name</label>
                 <input pattern="[a-zA-Z0-9 ]+" class="input-field guess-form" type="text" id="chal-2-name">
+<!-- Challenger 2 name error -->
+                <div class="error-c2n">
+                  <i class="fas fa-exclamation-triangle error-i"></i>
+                  <p class="error-t">Enter a name</p>
+                </div>
               </div>
-
+<!-- Challenger 2 guess -->
               <div class="l-flex-1">
                 <label for="chal-2-guess">Guess</label>
                 <input class="input-field guess-form" type="number" id="chal-2-guess">
               </div>
-
             </div>
-
+<!-- Submit, Reset, Clear buttons -->
             <div class="l-flex marg-b-20 l-container l-flex-a-e l-flex-j-sb">
               <button class="btn uppercase l-flex-1" id="guess-btn">Submit Guess</button>
               <button class="btn uppercase l-flex-1" id="reset-btn">Reset Game</button>
               <button class="btn uppercase l-flex-1" type="button" id="clear-btn">Clear Game</button>
             </div>
-
         </section>
-       
 <!-- Section for latest score -->
         <section class="card card-2-3 card-bot l-flex-2">
           <h3 class="marg-b-10">Latest Score</h3>
-
           <div class="l-flex l-flex-j-center">
-           
             <div class="latest-score l-flex-1">
               <h4 class="marg-b-5 chal-1-name-display">Challenger 1 Name</h4>
               <p class="fnt-light">current guess</p>
@@ -104,29 +100,11 @@
               <p class="latest-score-num chal-2-guess-display">0</p>
               <p class="fnt-light fnt-hint chal-2-high-low">that's too low</p>
             </div>
-
           </div>
         </section>
       </div>
-
 <!-- Div right side of page (output) -->
       <div class="output l-flex l-flex-dir l-flex-1">
-        <section class="l-flex l-flex-dir winner-card animated flash">
-          <div class="l-flex l-flex-j-sa">
-            <p class="chal-1-name vs-chal-1 vs-chal uppercase">challenger 1 name</p>
-            <p class="vs">vs</p>
-            <p class="chal-2-name vs-chal-2 vs-chal uppercase">challenger 2 name</p>
-          </div>
-          <div class="winner-text uppercase">
-            <p class="winner-chal-name">challenger 2 name</p>
-            <p class="fnt-light">WINNER</p>
-          </div>
-          <div class="l-flex l-flex-j-sb l-flex-a-e guess-count">
-            <p class="l-flex-1 fnt-light uppercase"><span class="fnt-x-bold">47</span> guesses</p>
-            <p class="l-flex-1 center fnt-light uppercase"><span class="fnt-x-bold">1.35</span> minutes</p>
-            <p class="l-flex-1 right-align"><i class="fas fa-times-circle"></i></p>
-          </div>
-        </section>
       </div>
     </main>
 <!-- Link to JavaScript -->
