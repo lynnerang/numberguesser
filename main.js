@@ -17,6 +17,8 @@ var chal1GuessInt;
 var chal2GuessInt;
 var guessInputsEl = [chal1NameEl, chal1GuessEl, chal2NameEl, chal2GuessEl];
 var numInputsEl = [chal1GuessEl, chal2GuessEl, minEl, maxEl];
+// Array for blocking invalid chars from number input
+var invalidChars = ["-", "+", "e"];
 
 // Setting variables for text to update
 var chal1NameText = document.querySelector('.chal-1-name-display');
@@ -25,21 +27,54 @@ var chal1GuessText = document.querySelector('.chal-1-guess-display');
 var chal2GuessText = document.querySelector('.chal-2-guess-display');
 var chal1HighLowText = document.querySelector('.chal-1-high-low');
 var chal2HighLowText = document.querySelector('.chal-2-high-low');
+var cardParent = document.querySelector('.output');
 var winnerText = 'You guessed right!';
 var winnerName;
+var winnerCardID = 1;
 
-// One button that resets the game and generates a new random number
+
+// Buttons for game
 var resetBtn = document.getElementById('reset-btn');
+var clearBtn = document.getElementById('clear-btn');
+var updateBtn = document.getElementById('update-btn');
+var guessBtn = document.getElementById('guess-btn');
 
 // Setting variable for card output side
 var cardTemplate = document.querySelector('.output');
 
-// Array for blocking invalid chars from number input
-var invalidChars = [
-  "-",
-  "+",
-  "e",
-];
+// Event listeners
+updateBtn.addEventListener('click', onSetRange);
+clearBtn.addEventListener('click', onClearFields);
+guessBtn.addEventListener('click', onSubmitGuess);
+cardParent.addEventListener('click', removeCard);
+chal1NameEl.addEventListener('keyup', removesErrorChalNames);
+chal2NameEl.addEventListener('keyup', removesErrorChalNames);
+
+  // Error message for challenger names
+var errorDivName1 = document.querySelector('.error-c1n');
+var errorDivName2 = document.querySelector('.error-c2n');
+
+  // Listens for whether user enters text into guess form
+for (var i = 0; i < guessInputsEl.length; i++){
+  guessInputsEl[i].addEventListener('keyup', function(){
+    var emptyInputs = guessInputsEl.every(function(input) { return !input.value; });
+    clearBtn.disabled = emptyInputs;
+  });
+}
+
+  // Listens for whether user tries to type invalid chars into number fields
+for (var i = 0; i < numInputsEl.length; i++){
+  numInputsEl[i].addEventListener('keydown', function(e) {
+    if (invalidChars.includes(e.key)) {
+      e.preventDefault();
+    }
+  });
+}
+
+// Sets default states for buttons
+resetBtn.disabled = true;
+clearBtn.disabled = true;
+
 
 // Start default game on page load
 startNewGame(1, 100);
@@ -52,24 +87,16 @@ function start() {
 
 function end() {
   var endTime = Date.now();
-  var totalTime = endTime - startTime;
-  var minutes = totalTime / 1000;
-
-
-  console.log(totalTime.toFixed(2) + " minutes");
-  console.log(guessCount);
+  var totalTime = (endTime - startTime) / 1000;
+  minutes = totalTime.toFixed(2);
 }
 
-// Starts new game and generates random number within the range
+// Generates random number within the range
 function setRandom(minimum, maximum) {
     randomNum = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
   }
 
-// Function to set range
-var updateBtn = document.getElementById('update-btn');
-
-updateBtn.addEventListener('click', onSetRange);
-
+// Starts a new game
 function startNewGame(minInt, maxInt) {
   
   if (minInt >= maxInt) {
@@ -88,6 +115,8 @@ function startNewGame(minInt, maxInt) {
   resetBtn.disabled = false;
 }
 
+
+// Sets range and triggers new game with random number in that range
 function onSetRange(e) {
   e.preventDefault();
   minInt = parseInt(minEl.value);
@@ -97,10 +126,6 @@ function onSetRange(e) {
 }
 
 // Function to submit and record player info and guesses
-var guessBtn = document.getElementById('guess-btn');
-
-guessBtn.addEventListener('click', onSubmitGuess);
-
 function onSubmitGuess(e) {
   e.preventDefault();
 
@@ -122,6 +147,14 @@ function onSubmitGuess(e) {
   togglesErrorChalNames();
 
   resetBtn.disabled = false;
+}
+
+function onClearFields(e) {
+    e.preventDefault();
+    for (var i = 0; i < guessInputsEl.length; i++) {
+      guessInputsEl[i].value = "";
+    }
+    clearBtn.disabled = true;
 }
 
 // Function to check it guesses are within min/max
@@ -166,47 +199,9 @@ function highOrLow(guess, text) {
   }
 }
 
-
-
-// Reset button disabled by default
-resetBtn.disabled = true;
-
-// Clear the inputs for challenger names and guesses
-var clearBtn = document.getElementById('clear-btn');
-
-clearBtn.addEventListener('click', onClearFields);
-
-clearBtn.disabled = true;
-
-
-// Listens for whether user enters text into guess form
-for (var i = 0; i < guessInputsEl.length; i++){
-  guessInputsEl[i].addEventListener('keyup', function(){
-    var emptyInputs = guessInputsEl.every(function(input) { return !input.value; });
-    clearBtn.disabled = emptyInputs;
-  });
-}
-
-// Listens for whether user tries to type invalid chars into number fields
-for (var i = 0; i < numInputsEl.length; i++){
-  numInputsEl[i].addEventListener('keydown', function(e) {
-    if (invalidChars.includes(e.key)) {
-      e.preventDefault();
-    }
-  });
-}
-
-function onClearFields(e) {
-    e.preventDefault();
-    for (var i = 0; i < guessInputsEl.length; i++) {
-      guessInputsEl[i].value = "";
-    }
-    clearBtn.disabled = true;
-}
-
 // Function to display the card
 function gameWon() {
-var htmlText = `<section class="l-flex l-flex-dir winner-card animated flash">
+  var htmlText = `<section class="l-flex l-flex-dir winner-card animated flash winner-card${winnerCardID}">
           <div class="l-flex l-flex-j-sa">
             <p class="chal-1-name vs-chal-1 vs-chal uppercase">${chal1NameEl.value}</p>
             <p class="vs">vs</p>
@@ -218,12 +213,20 @@ var htmlText = `<section class="l-flex l-flex-dir winner-card animated flash">
           </div>
           <div class="l-flex l-flex-j-sb l-flex-a-e guess-count">
             <p class="l-flex-1 fnt-light uppercase"><span class="fnt-x-bold">${guessCount * 2}</span> guesses</p>
-            <p class="l-flex-1 center fnt-light uppercase"><span class="fnt-x-bold">1.35</span> minutes</p>
-            <p class="l-flex-1 right-align"><i class="fas fa-times-circle"></i></p>
+            <p class="l-flex-1 center fnt-light uppercase"><span class="fnt-x-bold">${minutes}</span> minutes</p>
+            <p class="l-flex-1 right-align"><i class="fas fa-times-circle delete-button"></i></p>
           </div>
         </section>`;
   cardTemplate.innerHTML += htmlText;
+  winnerCardID++;
 };
+
+function removeCard() {
+  if (event.target.classList.contains('delete-button')) {
+    event.target.parentNode.parentNode.parentNode.remove();
+  }
+}
+
 
 
   //Stop the timer
@@ -239,9 +242,6 @@ var htmlText = `<section class="l-flex l-flex-dir winner-card animated flash">
 
 // Error messages
 
-// Error message for challenger names
-var errorDivName1 = document.querySelector('.error-c1n');
-var errorDivName2 = document.querySelector('.error-c2n');
 
 function togglesErrorChalNames (){
   if(chal1NameEl.value == "") {
@@ -254,11 +254,6 @@ function togglesErrorChalNames (){
     guessBtn.disabled = true;
   }
 }
-
-console.log(randomNum);
-
-chal1NameEl.addEventListener('keyup', removesErrorChalNames);
-chal2NameEl.addEventListener('keyup', removesErrorChalNames);
 
 function removesErrorChalNames() {
   if(chal1NameEl.value !== "") {
