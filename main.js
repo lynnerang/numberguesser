@@ -206,7 +206,7 @@ function onClearFields(e) {
 
 // Function to display the card
 function gameWon() {
-var htmlText = `<section class="l-flex l-flex-dir winner-card">
+var htmlText = `<section class="l-flex l-flex-dir winner-card animated flash">
           <div class="l-flex l-flex-j-sa">
             <p class="chal-1-name vs-chal-1 vs-chal uppercase">${chal1NameEl.value}</p>
             <p class="vs">vs</p>

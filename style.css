@@ -393,3 +393,26 @@ main {
 /*Theme style -------------------- */
 
 /*Testing -------------------- */
+
+
+@media screen and (max-width: 680px) {
+  
+  main {
+    flex-direction: column;
+  }
+
+  header {
+    font-size: .8em;
+  }
+
+  .subheader {
+    width: 85%;
+  }
+
+  .winner-card {
+    margin: 20px 20px;
+  }
+}
+
+
+
