@@ -309,6 +309,7 @@ main {
 
 .output {
   background: #d1d2d4;
+  overflow: scroll;
 }
 
 .pad-b-5 {
@@ -417,15 +418,30 @@ main {
   }
 
   header {
-    font-size: .8em;
+    font-size: .7em;
   }
 
   .subheader {
-    width: 85%;
+    width: 80%;
   }
 
   .winner-card {
     margin: 20px 20px;
+  }
+
+  .btn {
+/*    display: block;
+    width: 80%;*/
+    margin: 0px 10px 10px 10px;
+  }
+
+  .l-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .l-flex-1 {
+    width: 95%;
   }
 }
 

@@ -2,6 +2,8 @@
 var randomNum;
 var minEl = document.getElementById('min-range');
 var maxEl = document.getElementById('max-range');
+minEl.value = 1;
+maxEl.value = 100;
 var minInt;
 var maxInt;
 var guessCount = 1;  //To log the first time before checkWinner fn is run that adds to it
@@ -46,6 +48,7 @@ var cardTemplate = document.querySelector('.output');
 // Event listeners
 updateBtn.addEventListener('click', onUpdateRange);
 clearBtn.addEventListener('click', onClearFields);
+resetBtn.addEventListener('click', onReset);
 guessBtn.addEventListener('click', onSubmitGuess);
 cardParent.addEventListener('click', onRemoveCard);
 chal1NameEl.addEventListener('keyup', removesErrorChalNames);
@@ -95,14 +98,14 @@ updateBtn.disabled = true;
 startNewGame(1, 100);
 
 // Game timer functions
-function start() {
+function startTimer() {
   startTime = Date.now();
-  console.log(startTime);
-};
+}
 
-function end() {
+function endTimer() {
   var endTime = Date.now();
   var totalTime = (endTime - startTime) / 1000;
+  console.log('total ' + totalTime);
   minutes = totalTime.toFixed(2);
 }
 
@@ -114,10 +117,20 @@ function setRandom(minimum, maximum) {
 // Starts a new game
 function startNewGame(minInt, maxInt) {
 
+  if (minInt < 0) {
+    minInt = 0;
+  }
+
+  console.log(minEl.innerText + " and " + maxEl.innerText);
+  minEl.value = minInt;
+  maxEl.value = maxInt;
+  document.querySelector('.min-range-txt').innerText = minInt;
+  document.querySelector('.max-range-txt').innerText = maxInt;
+
   setRandom(minInt, maxInt);
 
-  // Restart timer
-  start();
+  // Restart timer & number of guesses
+  startTimer();
   guessCount = 1;
 }
 
@@ -135,10 +148,14 @@ function onUpdateRange(e) {
     maxEl.classList.add('error-border');
   } else {
     guessErrorDiv.classList.add('error-r');
+<<<<<<< HEAD
+
+=======
     minEl.classList.remove('error-border');
     maxEl.classList.remove('error-border');
     document.querySelector('.min-range-txt').innerText = minInt;
     document.querySelector('.max-range-txt').innerText = maxInt;
+>>>>>>> 1e21f0c3fd9cf2c9ac15453e7e9d3df8b1ca210e
     startNewGame(minInt, maxInt);
     resetBtn.disabled = false;
   }
@@ -164,6 +181,17 @@ function onSubmitGuess(e) {
 
   checkForWinner(chal1GuessInt, chal2GuessInt);
 
+<<<<<<< HEAD
+  togglesErrorChalNames();
+
+  chal1GuessEl.value = "";
+  chal2GuessEl.value = "";
+  resetBtn.disabled = false;
+}
+
+function onClearFields() {
+
+=======
   resetBtn.disabled = false;
 }
 
@@ -185,12 +213,50 @@ function checksMinMaxGuess(chal1Guess, chal2Guess) {
 // Function onClearFields
 function onClearFields(e) {
     e.preventDefault();
+>>>>>>> 1e21f0c3fd9cf2c9ac15453e7e9d3df8b1ca210e
     for (var i = 0; i < guessInputsEl.length; i++) {
       guessInputsEl[i].value = "";
     }
     clearBtn.disabled = true;
 }
 
+<<<<<<< HEAD
+function onRemoveCard() {
+  if (event.target.classList.contains('delete-button')) {
+    event.target.parentNode.parentNode.parentNode.remove();
+  }
+}
+
+function onReset(e) {
+  e.preventDefault();
+
+  minEl.value = 1;
+  maxEl.value = 100;
+  chal1NameText.innerText = "Challenger 1 Name";
+  chal2NameText.innerText = "Challenger 2 Name";
+  chal1GuessText.innerText = "0";
+  chal2GuessText.innerText = "0";
+  chal1HighLowText.innerText = "--";
+  chal2HighLowText.innerText = "--";
+
+  onClearFields();
+  startNewGame(1, 100);
+  resetBtn.disabled = true;
+}
+
+// Function to check if guesses are within min/max
+function checksMinMaxGuess(chal1Guess, chal2Guess) {
+  if((chal1Guess < minInt || chal1Guess > maxInt) && (chal2Guess < minInt || chal2Guess > maxInt)) {
+    alert('Submitted guesses are outside of defined range');
+  } else if (chal1Guess < minInt || chal1Guess > maxInt) {
+    alert('Submitted guess chal1 outside of defined range');
+  } else if (chal2Guess < minInt || chal2Guess > maxInt) {
+    alert('Submitted guess chal2 outside of defined range');
+  }
+}
+
+=======
+>>>>>>> 1e21f0c3fd9cf2c9ac15453e7e9d3df8b1ca210e
 // Function checks for winner
 function checkForWinner(guess1, guess2) {
     if (guess1 == randomNum && guess2 == randomNum) {
@@ -198,9 +264,11 @@ function checkForWinner(guess1, guess2) {
      //!!!add reset game
   } else if (guess1 == randomNum && guess2 != randomNum) {
     winnerName = chal1NameEl.value;
+    endTimer();
     gameWon();
   } else if (guess1 != randomNum && guess2 == randomNum) {
     winnerName = chal2NameEl.value;
+    endTimer();
     gameWon();
   } else {
     chal1GuessEl.value = "";
@@ -224,6 +292,7 @@ function highOrLow(guess, text) {
 
 // Function to display the card
 function gameWon() {
+
   var htmlText = `<section class="l-flex l-flex-dir winner-card animated flash winner-card${winnerCardID}">
           <div class="l-flex l-flex-j-sa">
             <p class="chal-1-name vs-chal-1 vs-chal uppercase">${chal1NameEl.value}</p>
@@ -242,27 +311,49 @@ function gameWon() {
         </section>`;
   cardTemplate.innerHTML += htmlText;
   winnerCardID++;
+
+  minInt -= 10;
+  maxInt += 10;
+
+  startNewGame(minInt, maxInt);
 };
 
-function onRemoveCard() {
-  if (event.target.classList.contains('delete-button')) {
-    event.target.parentNode.parentNode.parentNode.remove();
+
+<<<<<<< HEAD
+// Error messages
+function togglesErrorChalNames (){
+  if(chal1NameEl.value == "") {
+    errorDivName1.classList.toggle('error-c1n');
+    cha1lNameEl.classList.add('error-border');
+    guessBtn.disabled = true;
+  } else if (chal2NameEl.value == "") {
+    errorDivName2.classList.toggle('error-c2n');
+    chal2NameEl.classList.add('error-border');
+    guessBtn.disabled = true;
   }
 }
 
+function removesErrorChalNames() {
+  if(chal1NameEl.value !== "") {
+    errorDivName1.classList.toggle('error-c1n');
+    chal1NameEl.classList.remove('error-border');
+    guessBtn.disabled = false;
+  } else if (chal2NameEl.value !== "") {
+    errorDivName2.classList.toggle('error-c2n');
+    chal2NameEl.classList.remove('error-border');
+    guessBtn.disabled = false;
+  }
+}
 
+// If name or guess is blank, then should not be able to submit guess
 
-  //Stop the timer
-  // end();
+// If chal1name blank and
+// If chal2name blank and
+// If guess1 blank and
+// If guess2 blank
 
-  // Ok to go negative?
-  // max = max + 10;
-  // min = min - 10;
-  // setRandom(min, max);
-
-  //reset game
-
-
+=======
+>>>>>>> 1e21f0c3fd9cf2c9ac15453e7e9d3df8b1ca210e
 
 // function togglesErrorChalNames (){
 //   if(chal1NameEl.value == "") {
