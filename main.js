@@ -69,7 +69,7 @@ for (var i = 0; i < rangeInputsEl.length; i++){
     var hasBothInputs = rangeInputsEl.every(function(input) { return input.value; });
 
     if (hasBothInputs) {
-      updateBtn.disabled = hadBothInputs;
+      updateBtn.disabled = hasBothInput;
     } else {    
       updateBtn.disabled = true;
     }
@@ -117,7 +117,7 @@ function startNewGame(minInt, maxInt) {
   if (minInt < 0) {
     minInt = 0;
   }
-  
+
   setRandom(minInt, maxInt);
 
   // Restart timer
