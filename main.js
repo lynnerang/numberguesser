@@ -114,6 +114,10 @@ function setRandom(minimum, maximum) {
 // Starts a new game
 function startNewGame(minInt, maxInt) {
 
+  if (minInt < 0) {
+    minInt = 0;
+  }
+  
   setRandom(minInt, maxInt);
 
   // Restart timer
