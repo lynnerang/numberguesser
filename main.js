@@ -15,6 +15,7 @@ var chal2NameEl = document.getElementById('chal-2-name');
 var chal2GuessEl = document.getElementById('chal-2-guess');
 var chal1GuessInt;
 var chal2GuessInt;
+var rangeInputsEl = [minEl, maxEl];
 var guessInputsEl = [chal1NameEl, chal1GuessEl, chal2NameEl, chal2GuessEl];
 var numInputsEl = [chal1GuessEl, chal2GuessEl, minEl, maxEl];
 // Array for blocking invalid chars from number input
@@ -46,7 +47,7 @@ var cardTemplate = document.querySelector('.output');
 updateBtn.addEventListener('click', onUpdateRange);
 clearBtn.addEventListener('click', onClearFields);
 guessBtn.addEventListener('click', onSubmitGuess);
-cardParent.addEventListener('click', removeCard);
+cardParent.addEventListener('click', onRemoveCard);
 chal1NameEl.addEventListener('keyup', removesErrorChalNames);
 chal2NameEl.addEventListener('keyup', removesErrorChalNames);
 
@@ -62,6 +63,19 @@ for (var i = 0; i < guessInputsEl.length; i++){
   });
 }
 
+//Have update button disabled if both range fields aren't full
+for (var i = 0; i < rangeInputsEl.length; i++){
+  rangeInputsEl[i].addEventListener('keyup', function(){
+    var hasBothInputs = rangeInputsEl.every(function(input) { return input.value; });
+
+    if (hasBothInputs) {
+      updateBtn.disabled = hadBothInputs;
+    } else {    
+      updateBtn.disabled = true;
+    }
+  });
+}
+
   // Listens for whether user tries to type invalid chars into number fields
 for (var i = 0; i < numInputsEl.length; i++){
   numInputsEl[i].addEventListener('keydown', function(e) {
@@ -74,6 +88,7 @@ for (var i = 0; i < numInputsEl.length; i++){
 // Sets default states for buttons
 resetBtn.disabled = true;
 clearBtn.disabled = true;
+updateBtn.disabled = true;
 
 
 // Start default game on page load
@@ -221,7 +236,7 @@ function gameWon() {
   winnerCardID++;
 };
 
-function removeCard() {
+function onRemoveCard() {
   if (event.target.classList.contains('delete-button')) {
     event.target.parentNode.parentNode.parentNode.remove();
   }
