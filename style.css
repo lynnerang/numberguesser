@@ -224,6 +224,10 @@ main {
   font-size: 0.7em;
 }
 
+.error-r {
+  visibility: hidden;
+}
+
 .flex-content-margin {
   margin: 0 20px 0 0;
 }
@@ -251,12 +255,6 @@ main {
 .header-span {
   font-weight: 300;
 }
-
-/*.hr {
-  width: 85px;
-  border: 1px solid #ffffff;
-  display: inline-block;
-}*/
 
 .input {
   background: #f5f6f8;
@@ -303,6 +301,15 @@ main {
 
 .output {
   background: #d1d2d4;
+}
+
+.pad-b-5 {
+  padding-bottom: 5px;
+}
+
+.pos-rel {
+  position: relative;
+  bottom: 5px;
 }
 
 .right-align {

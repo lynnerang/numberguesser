@@ -24,7 +24,7 @@
 <!-- Section for set range -->
         <section class="card card-1 l-flex-1">
           <h3 class="block">Set Range</h3>
-          <div class="l-flex l-flex-a-e l-container l-flex-j-sb">
+          <div class="l-flex l-flex-a-e l-container l-flex-j-sb marg-b-5">
             <div class="l-flex-1 flex-content-margin">
               <label for="min-range">Min Range</label>
               <input class="input-field" type="number" id="min-range">
@@ -37,6 +37,11 @@
               <button class="btn uppercase" id="update-btn" type="button">Update</button>
             </div>
           </div>
+<!-- Minimum range error -->
+            <div class="error-r pos-rel j-rng-err">
+              <i class="fas fa-exclamation-triangle error-i"></i>
+              <p class="error-t">Minimum must be less than maximum</p>
+            </div>
         </section>
 <!-- Section for challengers -->
         <section class="card card-2-3 l-flex-3">

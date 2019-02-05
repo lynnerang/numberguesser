@@ -43,7 +43,7 @@ var guessBtn = document.getElementById('guess-btn');
 var cardTemplate = document.querySelector('.output');
 
 // Event listeners
-updateBtn.addEventListener('click', onSetRange);
+updateBtn.addEventListener('click', onUpdateRange);
 clearBtn.addEventListener('click', onClearFields);
 guessBtn.addEventListener('click', onSubmitGuess);
 cardParent.addEventListener('click', removeCard);
@@ -98,31 +98,31 @@ function setRandom(minimum, maximum) {
 
 // Starts a new game
 function startNewGame(minInt, maxInt) {
-  
-  if (minInt >= maxInt) {
-    alert('Must have higher maximum than minimum!');
-  } else {
-    // Sets range text to entries
-    document.querySelector('.min-range-txt').innerText = minInt;
-    document.querySelector('.max-range-txt').innerText = maxInt;
 
-    setRandom(minInt, maxInt);
+  setRandom(minInt, maxInt);
 
-    // Restart timer
-    start();
-    guessCount = 1;
-  }
-  resetBtn.disabled = false;
+  // Restart timer
+  start();
+  guessCount = 1;
 }
 
-
-// Sets range and triggers new game with random number in that range
-function onSetRange(e) {
+// Sets range and triggers new game with random number in that range and displays error if min > max
+function onUpdateRange(e) {
   e.preventDefault();
+
   minInt = parseInt(minEl.value);
   maxInt = parseInt(maxEl.value);
+  var guessErrorDiv = document.querySelector('.j-rng-err');
 
-  startNewGame(minInt, maxInt);
+  if (minInt >= maxInt) {
+    guessErrorDiv.classList.remove('error-r');
+  } else {
+    guessErrorDiv.classList.add('error-r');
+    document.querySelector('.min-range-txt').innerText = minInt;
+    document.querySelector('.max-range-txt').innerText = maxInt;
+    startNewGame(minInt, maxInt);
+    resetBtn.disabled = false;
+  }
 }
 
 // Function to submit and record player info and guesses
@@ -157,7 +157,7 @@ function onClearFields(e) {
     clearBtn.disabled = true;
 }
 
-// Function to check it guesses are within min/max
+// Function to check if guesses are within min/max
 function checksMinMaxGuess(chal1Guess, chal2Guess) {
   if((chal1Guess < minInt || chal1Guess > maxInt) && (chal2Guess < minInt || chal2Guess > maxInt)) {
     alert('Submitted guesses are outside of defined range');
@@ -273,8 +273,5 @@ function removesErrorChalNames() {
 // If chal2name blank and
 // If guess1 blank and
 // If guess2 blank
-
-
-
 
 
