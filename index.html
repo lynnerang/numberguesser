@@ -38,10 +38,10 @@
             </div>
           </div>
 <!-- Minimum range error -->
-            <div class="error-r pos-rel j-rng-err">
-              <i class="fas fa-exclamation-triangle error-i"></i>
-              <p class="error-t">Minimum must be less than maximum</p>
-            </div>
+          <div class="error-r pos-rel j-rng-err">
+            <i class="fas fa-exclamation-triangle error-i"></i>
+            <p class="error-t">Minimum must be less than maximum</p>
+          </div>
         </section>
 <!-- Section for challengers -->
         <section class="card card-2-3 l-flex-3">
@@ -53,7 +53,7 @@
                 <label for="chal-1-name">Name</label>
                 <input pattern="[a-zA-Z0-9 ]+" class="input-field guess-form" type="text" id="chal-1-name">
 <!-- Challenger 1 name error-->
-               <div class="error-c1n">
+               <div class="error-c1n j-c1n-err">
                   <i class="fas fa-exclamation-triangle error-i"></i>
                   <p class="error-t">Enter a name</p>
                </div>
@@ -62,6 +62,11 @@
               <div class="l-flex-1">
                 <label for="chal-1-guess">Guess</label>
                 <input class="input-field guess-form" type="number" id="chal-1-guess">
+<!-- Challenger 1 guess error-->
+                 <div class="error-c1g j-c1g-err">
+                    <i class="fas fa-exclamation-triangle error-i"></i>
+                    <p class="error-t">Guess out of range</p>
+                 </div>
               </div>
             </div>
 <!-- Challenger 2 -->
@@ -71,7 +76,7 @@
                 <label for="chal-2-name">Name</label>
                 <input pattern="[a-zA-Z0-9 ]+" class="input-field guess-form" type="text" id="chal-2-name">
 <!-- Challenger 2 name error -->
-                <div class="error-c2n">
+                <div class="error-c2n j-c2n-err">
                   <i class="fas fa-exclamation-triangle error-i"></i>
                   <p class="error-t">Enter a name</p>
                 </div>
@@ -80,10 +85,19 @@
               <div class="l-flex-1">
                 <label for="chal-2-guess">Guess</label>
                 <input class="input-field guess-form" type="number" id="chal-2-guess">
+<!-- Challenger 2 guess error-->
+               <div class="error-c2g j-c2g-err">
+                  <i class="fas fa-exclamation-triangle error-i"></i>
+                  <p class="error-t">Guess out of range</p>
+               </div>
               </div>
             </div>
 <!-- Submit, Reset, Clear buttons -->
+<<<<<<< HEAD
             <div class="l-flex marg-b-20 l-container l-flex-a-e l-flex-j-sb guess-btns">
+=======
+            <div class="l-flex marg-b-5 l-container l-flex-a-e l-flex-j-sb">
+>>>>>>> 1e21f0c3fd9cf2c9ac15453e7e9d3df8b1ca210e
               <button class="btn uppercase l-flex-1" id="guess-btn">Submit Guess</button>
               <button class="btn uppercase l-flex-1" id="reset-btn">Reset Game</button>
               <button class="btn uppercase l-flex-1" type="button" id="clear-btn">Clear Game</button>

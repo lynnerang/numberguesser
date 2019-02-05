@@ -144,13 +144,23 @@ function onUpdateRange(e) {
 
   if (minInt >= maxInt) {
     guessErrorDiv.classList.remove('error-r');
+    minEl.classList.add('error-border');
+    maxEl.classList.add('error-border');
   } else {
     guessErrorDiv.classList.add('error-r');
+<<<<<<< HEAD
 
+=======
+    minEl.classList.remove('error-border');
+    maxEl.classList.remove('error-border');
+    document.querySelector('.min-range-txt').innerText = minInt;
+    document.querySelector('.max-range-txt').innerText = maxInt;
+>>>>>>> 1e21f0c3fd9cf2c9ac15453e7e9d3df8b1ca210e
     startNewGame(minInt, maxInt);
     resetBtn.disabled = false;
   }
 }
+
 
 // Function to submit and record player info and guesses
 function onSubmitGuess(e) {
@@ -163,7 +173,7 @@ function onSubmitGuess(e) {
   chal2GuessText.innerText = chal2GuessEl.value;
   chal1NameText.innerText = chal1NameEl.value;
   chal2NameText.innerText = chal2NameEl.value;
-  
+
   checksMinMaxGuess(chal1GuessInt, chal2GuessInt);
 
   highOrLow(chal1GuessInt, chal1HighLowText);
@@ -171,6 +181,7 @@ function onSubmitGuess(e) {
 
   checkForWinner(chal1GuessInt, chal2GuessInt);
 
+<<<<<<< HEAD
   togglesErrorChalNames();
 
   chal1GuessEl.value = "";
@@ -180,12 +191,36 @@ function onSubmitGuess(e) {
 
 function onClearFields() {
 
+=======
+  resetBtn.disabled = false;
+}
+
+// Function to check if guesses are within min/max
+function checksMinMaxGuess(chal1Guess, chal2Guess) {
+  if (chal1Guess < minInt || chal1Guess > maxInt) {
+    alert('Guess too high1');
+
+    // var chal1GuessRngErr = document.querySelector('.j-c1g-err');
+    // chal1GuessRngErr.classList.remove('error-c1g');
+    // chal1GuessEl.classList.add('error-border');
+    // guessBtn.disabled = true;
+
+  } else if (chal2Guess < minInt || chal2Guess > maxInt) {
+    alert('Guess too high2');
+  }
+}
+
+// Function onClearFields
+function onClearFields(e) {
+    e.preventDefault();
+>>>>>>> 1e21f0c3fd9cf2c9ac15453e7e9d3df8b1ca210e
     for (var i = 0; i < guessInputsEl.length; i++) {
       guessInputsEl[i].value = "";
     }
     clearBtn.disabled = true;
 }
 
+<<<<<<< HEAD
 function onRemoveCard() {
   if (event.target.classList.contains('delete-button')) {
     event.target.parentNode.parentNode.parentNode.remove();
@@ -220,6 +255,8 @@ function checksMinMaxGuess(chal1Guess, chal2Guess) {
   }
 }
 
+=======
+>>>>>>> 1e21f0c3fd9cf2c9ac15453e7e9d3df8b1ca210e
 // Function checks for winner
 function checkForWinner(guess1, guess2) {
     if (guess1 == randomNum && guess2 == randomNum) {
@@ -282,6 +319,7 @@ function gameWon() {
 };
 
 
+<<<<<<< HEAD
 // Error messages
 function togglesErrorChalNames (){
   if(chal1NameEl.value == "") {
@@ -314,4 +352,29 @@ function removesErrorChalNames() {
 // If guess1 blank and
 // If guess2 blank
 
+=======
+>>>>>>> 1e21f0c3fd9cf2c9ac15453e7e9d3df8b1ca210e
 
+// function togglesErrorChalNames (){
+//   if(chal1NameEl.value == "") {
+//     errorDivName1.classList.toggle('error-c1n');
+//     cha1lNameEl.classList.add('error-border');
+//     guessBtn.disabled = true;
+//   } else if (chal2NameEl.value == "") {
+//     errorDivName2.classList.toggle('error-c2n');
+//     chal2NameEl.classList.add('error-border');
+//     guessBtn.disabled = true;
+//   }
+// }
+
+// function removesErrorChalNames() {
+//   if(chal1NameEl.value !== "") {
+//     errorDivName1.classList.toggle('error-c1n');
+//     chal1NameEl.classList.remove('error-border');
+//     guessBtn.disabled = false;
+//   } else if (chal2NameEl.value !== "") {
+//     errorDivName2.classList.toggle('error-c2n');
+//     chal2NameEl.classList.remove('error-border');
+//     guessBtn.disabled = false;
+//   }
+// }
