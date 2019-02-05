@@ -67,17 +67,17 @@ for (var i = 0; i < guessInputsEl.length; i++){
 }
 
 //Have update button disabled if both range fields aren't full
-for (var i = 0; i < rangeInputsEl.length; i++){
-  rangeInputsEl[i].addEventListener('keyup', function(){
-    var hasBothInputs = rangeInputsEl.every(function(input) { return input.value; });
+// for (var i = 0; i < rangeInputsEl.length; i++){
+//   rangeInputsEl[i].addEventListener('keyup', function(){
+//     var hasBothInputs = rangeInputsEl.every(function(input) { return input.value; });
 
-    if (hasBothInputs) {
-      updateBtn.disabled = false;
-    } else {    
-      updateBtn.disabled = true;
-    }
-  });
-}
+//     if (hasBothInputs) {
+//       updateBtn.disabled = false;
+//     } else {    
+//       updateBtn.disabled = true;
+//     }
+//   });
+// }
 
   // Listens for whether user tries to type invalid chars into number fields
 for (var i = 0; i < numInputsEl.length; i++){
@@ -91,7 +91,7 @@ for (var i = 0; i < numInputsEl.length; i++){
 // Sets default states for buttons
 resetBtn.disabled = true;
 clearBtn.disabled = true;
-updateBtn.disabled = true;
+// updateBtn.disabled = true;
 
 
 // Start default game on page load
@@ -135,12 +135,33 @@ function startNewGame(minInt, maxInt) {
 }
 
 // Sets range and triggers new game with random number in that range and displays error if min > max
-function onUpdateRange(e) {
-  e.preventDefault();
-
-  minInt = parseInt(minEl.value);
-  maxInt = parseInt(maxEl.value);
+function onUpdateRange() {
+  
+  var hasBothInputs = rangeInputsEl.every(function(input) { return input.value; });
   var guessErrorDiv = document.querySelector('.j-rng-err');
+
+  if (!hasBothInputs) {
+    guessErrorDiv.innerText = "Enter both minimnum and maximum numbers.";
+
+    guessErrorDiv.classList.remove('error-r');
+    minEl.classList.add('error-border');
+    maxEl.classList.add('error-border');
+  } else {  
+    guessErrorDiv.classList.add('error-r');
+    minEl.classList.remove('error-border');
+    maxEl.classList.remove('error-border');
+
+    minInt = parseInt(minEl.value);
+    maxInt = parseInt(maxEl.value);
+
+    validateRange(minInt, maxInt);
+  }
+}
+
+function validateRange(minInt, maxInt) {
+
+  var guessErrorDiv = document.querySelector('.j-rng-err');
+  guessErrorDiv.innerText = "Minimum must be less than maximum.";
 
   if (minInt >= maxInt) {
     guessErrorDiv.classList.remove('error-r');
@@ -148,23 +169,33 @@ function onUpdateRange(e) {
     maxEl.classList.add('error-border');
   } else {
     guessErrorDiv.classList.add('error-r');
-<<<<<<< HEAD
-
-=======
     minEl.classList.remove('error-border');
     maxEl.classList.remove('error-border');
-    document.querySelector('.min-range-txt').innerText = minInt;
-    document.querySelector('.max-range-txt').innerText = maxInt;
->>>>>>> 1e21f0c3fd9cf2c9ac15453e7e9d3df8b1ca210e
+
     startNewGame(minInt, maxInt);
     resetBtn.disabled = false;
   }
 }
 
+// Function to check if guesses are within min/max
+function checksMinMaxGuess(chal1Guess, chal2Guess) {
+  if (chal1Guess < minInt || chal1Guess > maxInt) {
+    alert('Guess too high1');
+
+    // var chal1GuessRngErr = document.querySelector('.j-c1g-err');
+    // chal1GuessRngErr.classList.remove('error-c1g');
+    // chal1GuessEl.classList.add('error-border');
+    // guessBtn.disabled = true;
+
+  } else if (chal2Guess < minInt || chal2Guess > maxInt) {
+    alert('Guess too high2');
+  } else {
+    alert('oh poo');
+  }
+}
 
 // Function to submit and record player info and guesses
-function onSubmitGuess(e) {
-  e.preventDefault();
+function onSubmitGuess() {
 
   chal1GuessInt = parseInt(chal1GuessEl.value);
   chal2GuessInt = parseInt(chal2GuessEl.value);
@@ -181,7 +212,6 @@ function onSubmitGuess(e) {
 
   checkForWinner(chal1GuessInt, chal2GuessInt);
 
-<<<<<<< HEAD
   togglesErrorChalNames();
 
   chal1GuessEl.value = "";
@@ -189,46 +219,26 @@ function onSubmitGuess(e) {
   resetBtn.disabled = false;
 }
 
-function onClearFields() {
 
-=======
-  resetBtn.disabled = false;
-}
 
-// Function to check if guesses are within min/max
-function checksMinMaxGuess(chal1Guess, chal2Guess) {
-  if (chal1Guess < minInt || chal1Guess > maxInt) {
-    alert('Guess too high1');
-
-    // var chal1GuessRngErr = document.querySelector('.j-c1g-err');
-    // chal1GuessRngErr.classList.remove('error-c1g');
-    // chal1GuessEl.classList.add('error-border');
-    // guessBtn.disabled = true;
-
-  } else if (chal2Guess < minInt || chal2Guess > maxInt) {
-    alert('Guess too high2');
-  }
-}
 
 // Function onClearFields
-function onClearFields(e) {
-    e.preventDefault();
->>>>>>> 1e21f0c3fd9cf2c9ac15453e7e9d3df8b1ca210e
+function onClearFields() {
+
     for (var i = 0; i < guessInputsEl.length; i++) {
       guessInputsEl[i].value = "";
     }
     clearBtn.disabled = true;
 }
 
-<<<<<<< HEAD
+
 function onRemoveCard() {
   if (event.target.classList.contains('delete-button')) {
     event.target.parentNode.parentNode.parentNode.remove();
   }
 }
 
-function onReset(e) {
-  e.preventDefault();
+function onReset() {
 
   minEl.value = 1;
   maxEl.value = 100;
@@ -255,20 +265,17 @@ function checksMinMaxGuess(chal1Guess, chal2Guess) {
   }
 }
 
-=======
->>>>>>> 1e21f0c3fd9cf2c9ac15453e7e9d3df8b1ca210e
 // Function checks for winner
 function checkForWinner(guess1, guess2) {
     if (guess1 == randomNum && guess2 == randomNum) {
     alert("It's a tie! Play again.");
+    onReset();
      //!!!add reset game
   } else if (guess1 == randomNum && guess2 != randomNum) {
     winnerName = chal1NameEl.value;
-    endTimer();
     gameWon();
   } else if (guess1 != randomNum && guess2 == randomNum) {
     winnerName = chal2NameEl.value;
-    endTimer();
     gameWon();
   } else {
     chal1GuessEl.value = "";
@@ -292,7 +299,8 @@ function highOrLow(guess, text) {
 
 // Function to display the card
 function gameWon() {
-
+  endTimer();
+  
   var htmlText = `<section class="l-flex l-flex-dir winner-card animated flash winner-card${winnerCardID}">
           <div class="l-flex l-flex-j-sa">
             <p class="chal-1-name vs-chal-1 vs-chal uppercase">${chal1NameEl.value}</p>
@@ -319,7 +327,7 @@ function gameWon() {
 };
 
 
-<<<<<<< HEAD
+
 // Error messages
 function togglesErrorChalNames (){
   if(chal1NameEl.value == "") {
@@ -352,8 +360,6 @@ function removesErrorChalNames() {
 // If guess1 blank and
 // If guess2 blank
 
-=======
->>>>>>> 1e21f0c3fd9cf2c9ac15453e7e9d3df8b1ca210e
 
 // function togglesErrorChalNames (){
 //   if(chal1NameEl.value == "") {
