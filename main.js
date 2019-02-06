@@ -4,8 +4,8 @@ var minEl = document.getElementById('min-range');
 var maxEl = document.getElementById('max-range');
 minEl.value = 1;
 maxEl.value = 100;
-var minInt;
-var maxInt;
+var minInt = 1;
+var maxInt = 100;
 var guessCount = 1;  //To log the first time before checkWinner fn is run that adds to it
 var startTime;
 var minutes;
@@ -18,7 +18,7 @@ var chal2GuessEl = document.getElementById('chal-2-guess');
 var chal1GuessInt;
 var chal2GuessInt;
 var rangeInputsEl = [minEl, maxEl];
-var guessInputsEl = [chal1NameEl, chal1GuessEl, chal2NameEl, chal2GuessEl];
+var guessFormInputsEl = [chal1NameEl, chal1GuessEl, chal2NameEl, chal2GuessEl];
 var numInputsEl = [chal1GuessEl, chal2GuessEl, minEl, maxEl];
 // Array for blocking invalid chars from number input
 var invalidChars = ["-", "+", "e"];
@@ -59,9 +59,9 @@ var errorDivName1 = document.querySelector('.error-c1n');
 var errorDivName2 = document.querySelector('.error-c2n');
 
   // Listens for whether user enters text into guess form
-for (var i = 0; i < guessInputsEl.length; i++){
-  guessInputsEl[i].addEventListener('keyup', function(){
-    var emptyInputs = guessInputsEl.every(function(input) { return !input.value; });
+for (var i = 0; i < guessFormInputsEl.length; i++){
+  guessFormInputsEl[i].addEventListener('keyup', function(){
+    var emptyInputs = guessFormInputsEl.every(function(input) { return !input.value; });
     clearBtn.disabled = emptyInputs;
   });
 }
@@ -95,7 +95,7 @@ clearBtn.disabled = true;
 
 
 // Start default game on page load
-startNewGame(1, 100);
+startNewGame(minInt, maxInt);
 
 // Game timer functions
 function startTimer() {
@@ -138,16 +138,18 @@ function startNewGame(minInt, maxInt) {
 function onUpdateRange() {
   
   var hasBothInputs = rangeInputsEl.every(function(input) { return input.value; });
-  var guessErrorDiv = document.querySelector('.j-rng-err');
+  var rangeErrDiv = document.querySelector('.j-rng-err');
+  var rangeErrTxt = document.querySelector('.js-range-txt');
 
   if (!hasBothInputs) {
-    guessErrorDiv.innerText = "Enter both minimnum and maximum numbers.";
 
-    guessErrorDiv.classList.remove('error-r');
+    rangeErrTxt.innerText = "Enter both minimnum and maximum numbers.";
+
+    rangeErrDiv.classList.remove('error-r');
     minEl.classList.add('error-border');
     maxEl.classList.add('error-border');
   } else {  
-    guessErrorDiv.classList.add('error-r');
+    rangeErrDiv.classList.add('error-r');
     minEl.classList.remove('error-border');
     maxEl.classList.remove('error-border');
 
@@ -160,15 +162,18 @@ function onUpdateRange() {
 
 function validateRange(minInt, maxInt) {
 
-  var guessErrorDiv = document.querySelector('.j-rng-err');
-  guessErrorDiv.innerText = "Minimum must be less than maximum.";
+  var rangeErrorDiv = document.querySelector('.j-rng-err');
+  var rangeErrTxt = document.querySelector('.js-range-txt');
 
   if (minInt >= maxInt) {
-    guessErrorDiv.classList.remove('error-r');
+
+    rangeErrTxt.innerText =  "Minimum must be less than maximum.";
+
+    rangeErrorDiv.classList.remove('error-r');
     minEl.classList.add('error-border');
     maxEl.classList.add('error-border');
   } else {
-    guessErrorDiv.classList.add('error-r');
+    rangeErrorDiv.classList.add('error-r');
     minEl.classList.remove('error-border');
     maxEl.classList.remove('error-border');
 
@@ -180,17 +185,17 @@ function validateRange(minInt, maxInt) {
 // Function to check if guesses are within min/max
 function checksMinMaxGuess(chal1Guess, chal2Guess) {
   if (chal1Guess < minInt || chal1Guess > maxInt) {
-    alert('Guess too high1');
 
-    // var chal1GuessRngErr = document.querySelector('.j-c1g-err');
-    // chal1GuessRngErr.classList.remove('error-c1g');
-    // chal1GuessEl.classList.add('error-border');
-    // guessBtn.disabled = true;
+    var chal1RngErrDiv = document.querySelector('.j-c1g-err');
+    chal1RngErrDiv.classList.remove('error-c1g');
+    chal1GuessEl.classList.add('error-border');
 
   } else if (chal2Guess < minInt || chal2Guess > maxInt) {
-    alert('Guess too high2');
-  } else {
-    alert('oh poo');
+
+    var chal2RngErrDiv = document.querySelector('.j-c2g-err');
+    chal2RngErrDiv.classList.remove('error-c2g');
+    chal2GuessEl.classList.add('error-border');
+
   }
 }
 
@@ -225,8 +230,8 @@ function onSubmitGuess() {
 // Function onClearFields
 function onClearFields() {
 
-    for (var i = 0; i < guessInputsEl.length; i++) {
-      guessInputsEl[i].value = "";
+    for (var i = 0; i < guessFormInputsEl.length; i++) {
+      guessFormInputsEl[i].value = "";
     }
     clearBtn.disabled = true;
 }
@@ -252,17 +257,6 @@ function onReset() {
   onClearFields();
   startNewGame(1, 100);
   resetBtn.disabled = true;
-}
-
-// Function to check if guesses are within min/max
-function checksMinMaxGuess(chal1Guess, chal2Guess) {
-  if((chal1Guess < minInt || chal1Guess > maxInt) && (chal2Guess < minInt || chal2Guess > maxInt)) {
-    alert('Submitted guesses are outside of defined range');
-  } else if (chal1Guess < minInt || chal1Guess > maxInt) {
-    alert('Submitted guess chal1 outside of defined range');
-  } else if (chal2Guess < minInt || chal2Guess > maxInt) {
-    alert('Submitted guess chal2 outside of defined range');
-  }
 }
 
 // Function checks for winner
