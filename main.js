@@ -20,6 +20,7 @@ var chal2GuessInt;
 var rangeInputsEl = [minEl, maxEl];
 var guessFormInputsEl = [chal1NameEl, chal1GuessEl, chal2NameEl, chal2GuessEl];
 var numInputsEl = [chal1GuessEl, chal2GuessEl, minEl, maxEl];
+
 // Array for blocking invalid chars from number input
 var invalidChars = ["-", "+", "e"];
 
@@ -35,6 +36,9 @@ var winnerText = 'You guessed right!';
 var winnerName;
 var winnerCardID = 1;
 
+// Error message for challenger names
+var errorDivName1 = document.querySelector('.error-c1n');
+var errorDivName2 = document.querySelector('.error-c2n');
 
 // Buttons for game
 var resetBtn = document.getElementById('reset-btn');
@@ -51,12 +55,6 @@ clearBtn.addEventListener('click', onClearFields);
 resetBtn.addEventListener('click', onReset);
 guessBtn.addEventListener('click', onSubmitGuess);
 cardParent.addEventListener('click', onRemoveCard);
-chal1NameEl.addEventListener('keyup', removesErrorChalNames);
-chal2NameEl.addEventListener('keyup', removesErrorChalNames);
-
-  // Error message for challenger names
-var errorDivName1 = document.querySelector('.error-c1n');
-var errorDivName2 = document.querySelector('.error-c2n');
 
   // Listens for whether user enters text into guess form
 for (var i = 0; i < guessFormInputsEl.length; i++){
@@ -65,19 +63,6 @@ for (var i = 0; i < guessFormInputsEl.length; i++){
     clearBtn.disabled = emptyInputs;
   });
 }
-
-//Have update button disabled if both range fields aren't full
-// for (var i = 0; i < rangeInputsEl.length; i++){
-//   rangeInputsEl[i].addEventListener('keyup', function(){
-//     var hasBothInputs = rangeInputsEl.every(function(input) { return input.value; });
-
-//     if (hasBothInputs) {
-//       updateBtn.disabled = false;
-//     } else {    
-//       updateBtn.disabled = true;
-//     }
-//   });
-// }
 
   // Listens for whether user tries to type invalid chars into number fields
 for (var i = 0; i < numInputsEl.length; i++){
@@ -91,7 +76,6 @@ for (var i = 0; i < numInputsEl.length; i++){
 // Sets default states for buttons
 resetBtn.disabled = true;
 clearBtn.disabled = true;
-// updateBtn.disabled = true;
 
 
 // Start default game on page load
@@ -182,20 +166,33 @@ function validateRange(minInt, maxInt) {
   }
 }
 
+
+  var chal1RngErrDiv = document.querySelector('.j-c1g-err');
+  var chal2RngErrDiv = document.querySelector('.j-c2g-err');
+
 // Function to check if guesses are within min/max
-function checksMinMaxGuess(chal1Guess, chal2Guess) {
-  if (chal1Guess < minInt || chal1Guess > maxInt) {
+function validateGuess(guessEl, errDiv) {
 
-    var chal1RngErrDiv = document.querySelector('.j-c1g-err');
-    chal1RngErrDiv.classList.remove('error-c1g');
-    chal1GuessEl.classList.add('error-border');
+  if (parseInt(guessEl.value) < minInt || parseInt(guessEl.value) > maxInt) {
+    errDiv.classList.remove('error-h');
+    guessEl.classList.add('error-border');
+  } else {
+    errDiv.classList.add('error-h');
+    guessEl.classList.remove('error-border');
 
-  } else if (chal2Guess < minInt || chal2Guess > maxInt) {
+    chal1GuessText.innerText = chal1GuessEl.value;
+    chal2GuessText.innerText = chal2GuessEl.value;
+    chal1NameText.innerText = chal1NameEl.value;
+    chal2NameText.innerText = chal2NameEl.value;
 
-    var chal2RngErrDiv = document.querySelector('.j-c2g-err');
-    chal2RngErrDiv.classList.remove('error-c2g');
-    chal2GuessEl.classList.add('error-border');
+    highOrLow(chal1GuessInt, chal1HighLowText);
+    highOrLow(chal2GuessInt, chal2HighLowText);
 
+    checkForWinner(chal1GuessInt, chal2GuessInt);
+
+    chal1GuessEl.value = "";
+    chal2GuessEl.value = "";
+    resetBtn.disabled = false;
   }
 }
 
@@ -205,26 +202,22 @@ function onSubmitGuess() {
   chal1GuessInt = parseInt(chal1GuessEl.value);
   chal2GuessInt = parseInt(chal2GuessEl.value);
 
-  chal1GuessText.innerText = chal1GuessEl.value;
-  chal2GuessText.innerText = chal2GuessEl.value;
-  chal1NameText.innerText = chal1NameEl.value;
-  chal2NameText.innerText = chal2NameEl.value;
+  var hasAllInputs = guessFormInputsEl.every(function(input) { return input.value; });
 
-  checksMinMaxGuess(chal1GuessInt, chal2GuessInt);
-
-  highOrLow(chal1GuessInt, chal1HighLowText);
-  highOrLow(chal2GuessInt, chal2HighLowText);
-
-  checkForWinner(chal1GuessInt, chal2GuessInt);
-
-  togglesErrorChalNames();
-
-  chal1GuessEl.value = "";
-  chal2GuessEl.value = "";
-  resetBtn.disabled = false;
+  if (hasAllInputs === true) {
+    for (var i = 0; i < guessFormInputsEl.length; i++){
+      guessFormInputsEl[i].classList.remove('error-border');
+    }
+    validateGuess(chal1GuessEl, chal1RngErrDiv);
+    validateGuess(chal2GuessEl, chal2RngErrDiv);
+  } else {
+    for (var i = 0; i < guessFormInputsEl.length; i++){
+      if (!guessFormInputsEl[i].value) {
+        guessFormInputsEl[i].classList.add('error-border');
+      }
+    }
+  }
 }
-
-
 
 
 // Function onClearFields
@@ -323,29 +316,29 @@ function gameWon() {
 
 
 // Error messages
-function togglesErrorChalNames (){
-  if(chal1NameEl.value == "") {
-    errorDivName1.classList.toggle('error-c1n');
-    cha1lNameEl.classList.add('error-border');
-    guessBtn.disabled = true;
-  } else if (chal2NameEl.value == "") {
-    errorDivName2.classList.toggle('error-c2n');
-    chal2NameEl.classList.add('error-border');
-    guessBtn.disabled = true;
-  }
-}
+// function togglesErrorChalNames (){
+//   if(chal1NameEl.value == "") {
+//     errorDivName1.classList.toggle('error-c1n');
+//     cha1lNameEl.classList.add('error-border');
+//     guessBtn.disabled = true;
+//   } else if (chal2NameEl.value == "") {
+//     errorDivName2.classList.toggle('error-c2n');
+//     chal2NameEl.classList.add('error-border');
+//     guessBtn.disabled = true;
+//   }
+// }
 
-function removesErrorChalNames() {
-  if(chal1NameEl.value !== "") {
-    errorDivName1.classList.toggle('error-c1n');
-    chal1NameEl.classList.remove('error-border');
-    guessBtn.disabled = false;
-  } else if (chal2NameEl.value !== "") {
-    errorDivName2.classList.toggle('error-c2n');
-    chal2NameEl.classList.remove('error-border');
-    guessBtn.disabled = false;
-  }
-}
+// function removesErrorChalNames() {
+//   if(chal1NameEl.value !== "") {
+//     errorDivName1.classList.toggle('error-c1n');
+//     chal1NameEl.classList.remove('error-border');
+//     guessBtn.disabled = false;
+//   } else if (chal2NameEl.value !== "") {
+//     errorDivName2.classList.toggle('error-c2n');
+//     chal2NameEl.classList.remove('error-border');
+//     guessBtn.disabled = false;
+//   }
+// }
 
 // If name or guess is blank, then should not be able to submit guess
 

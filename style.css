@@ -204,19 +204,7 @@ main {
  transform: translate(-50%, -50%);
 }
 
-.error-c1n {
-  visibility: hidden;
-}
-
-.error-c2n {
-  visibility: hidden;
-}
-
-.error-c1g {
-  visibility: hidden;
-}
-
-.error-c2g {
+.error-h {
   visibility: hidden;
 }
 
