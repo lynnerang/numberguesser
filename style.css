@@ -204,19 +204,7 @@ main {
  transform: translate(-50%, -50%);
 }
 
-.error-c1n {
-  visibility: hidden;
-}
-
-.error-c2n {
-  visibility: hidden;
-}
-
-.error-c1g {
-  visibility: hidden;
-}
-
-.error-c2g {
+.error-h {
   visibility: hidden;
 }
 
@@ -410,6 +398,14 @@ main {
 
 /*Testing -------------------- */
 
+.mr-pb {
+    width: 100px;
+    animation: float 10s linear infinite;
+}
+
+
+
+
 
 @media screen and (max-width: 680px) {
   
@@ -437,11 +433,23 @@ main {
 
   .l-container {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .l-flex-1 {
     width: 95%;
+  }
+
+  .flex-content-margin {
+    margin: 0;
+  }
+
+  .input-field {
+    box-sizing: border-box;
+  }
+
+  .l-flex-2f {
+    flex: 1;
   }
 }
 
