@@ -164,8 +164,6 @@ function onSubmitGuess() {
   chal1GuessInt = parseInt(chal1GuessEl.value);
   chal2GuessInt = parseInt(chal2GuessEl.value);
 
-  checkForMrPB();
-
   if (hasAllInputs() && guessesValid()) {
     showLatestScore();
     chal1GuessEl.value = "";
@@ -176,6 +174,8 @@ function onSubmitGuess() {
   } else {
     checkForValues();
   }
+
+  checkForMrPB();
 }
 
 //Checks if both challenger names and guesses were entered
@@ -232,7 +232,9 @@ function guessesValid() {
 }
 
 function checkForMrPB() {
-  if (chal1NameEl.value.includes('poopy butthole') || chal2NameEl.value.includes('poopy butthole')) {
+  chal1NameLC = chal1NameEl.value.toLowerCase();
+  chal2NameLC = chal2NameEl.value.toLowerCase();
+  if (chal1NameLC.includes("poopy", "butthole") || chal2NameLC.value.includes("poopy", "butthole")) {
     document.querySelector('.pb-animation').classList.add('mr-pb');
   }
 }
@@ -328,7 +330,7 @@ function highOrLow(guess, text) {
 // Function to display the card
 function gameWon() {
   endTimer();
-  var htmlText = `<section class="l-flex l-flex-dir winner-card winner-card">
+  var htmlText = `<section class="l-flex l-flex-dir winner-card animated flash">
           <div class="l-flex l-flex-j-sa">
             <p class="chal-1-name vs-chal-1 vs-chal uppercase">${chal1NameEl.value}</p>
             <p class="vs">vs</p>

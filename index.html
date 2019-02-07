@@ -24,19 +24,19 @@
 <!-- Div of left side of page (input) -->
       <div class="input l-flex l-flex-dir l-flex-1">
 <!-- Section for set range -->
-        <section class="card card-1 l-flex-1">
+        <section class="card card-1 l-flex-1" id="rng-section">
           <h3 class="block">Set Range</h3>
           <div class="l-flex l-flex-a-e l-container l-flex-j-sb marg-b-5">
-            <div class="l-flex-1 flex-content-margin">
+            <div class="l-flex-1 flex-content-margin mq-w">
               <label for="min-range">Min Range</label>
               <input class="input-field" type="number" id="min-range">
             </div>
-            <div class="l-flex-1 flex-content-margin">
+            <div class="l-flex-1 flex-content-margin mq-w">
               <label for="max-range">Max Range</label>
               <input class="input-field" type="number" id="max-range">
             </div>
-            <div class="l-flex-1 l-flex l-flex-j-c l-flex-a-c">
-              <button class="btn uppercase" id="update-btn" type="button">Update</button>
+            <div class="l-flex-1 l-flex l-flex-j-c l-flex-a-c w-33 m15">
+              <button class="btn uppercase m0" id="update-btn" type="button">Update</button>
             </div>
           </div>
 <!-- Minimum range error -->
@@ -46,12 +46,12 @@
           </div>
         </section>
 <!-- Section for challengers -->
-        <section class="card card-2-3 l-flex-3">
+        <section class="card card-2-3 l-flex-3" id="chal-section">
           <p class="marg-b-20 range-text">The Current Range is <span class="underline fnt-x-bold fnt-range min-range-txt">1</span> to <span class="underline fnt-x-bold fnt-range max-range-txt">100</span></p>
 <!-- Challenger 1 -->
           <h3>Challenger 1</h3>
-            <div class="l-flex l-container marg-b-20">
-             <div class="l-flex-2f flex-content-margin">
+            <div class="l-flex l-container marg-b-20 mq-w">
+             <div class="l-flex-2f flex-content-margin mq-w">
                 <label for="chal-1-name">Name</label>
                 <input pattern="[a-zA-Z0-9 ]+" class="input-field guess-form" type="text" id="chal-1-name">
 <!-- Challenger 1 name error-->
@@ -61,7 +61,7 @@
                </div>
              </div>
 <!-- Challenger 1 guess -->
-              <div class="l-flex-1">
+              <div class="l-flex-1 mq-w">
                 <label for="chal-1-guess">Guess</label>
                 <input class="input-field guess-form" type="number" id="chal-1-guess">
 <!-- Challenger 1 guess error-->
@@ -73,8 +73,8 @@
             </div>
 <!-- Challenger 2 -->
           <h3>Challenger 2</h3>
-            <div class="l-flex marg-b-20 l-container">
-              <div class="l-flex-2f flex-content-margin">
+            <div class="l-flex marg-b-20 l-container mq-w">
+              <div class="l-flex-2f flex-content-margin mq-w">
                 <label for="chal-2-name">Name</label>
                 <input pattern="[a-zA-Z0-9 ]+" class="input-field guess-form" type="text" id="chal-2-name">
 <!-- Challenger 2 name error -->
@@ -84,7 +84,7 @@
                 </div>
               </div>
 <!-- Challenger 2 guess -->
-              <div class="l-flex-1">
+              <div class="l-flex-1 mq-w">
                 <label for="chal-2-guess">Guess</label>
                 <input class="input-field guess-form" type="number" id="chal-2-guess">
 <!-- Challenger 2 guess error-->
@@ -102,9 +102,9 @@
             </div>
         </section>
 <!-- Section for latest score -->
-        <section class="card card-2-3 card-bot l-flex-2">
-          <h3 class="marg-b-10">Latest Score</h3>
-          <div class="l-flex l-flex-j-center">
+        <section class="card card-2-3 card-bot l-flex-2 pos-rel" id="lat-scr">
+          <h3 class="marg-b-15">Latest Score</h3>
+          <div class="l-flex l-flex-j-center" id="lat-scr-sec">
             <div class="latest-score l-flex-1">
               <h4 class="marg-b-5 chal-1-name-display">--</h4>
               <p class="fnt-light">current guess</p>
@@ -112,6 +112,9 @@
               <p class="fnt-light fnt-hint chal-1-high-low">--</p>
             </div>
             <div class="latest-score l-flex-1">
+              <h4 class="marg-b-5 chal-2-name-display">--</h4>
+            <hr class="hr-ls">
+            <div class="latest-score l-flex-1 marg-t-25">
               <h4 class="marg-b-5 chal-2-name-display">--</h4>
               <p class="fnt-light">current guess</p>
               <p class="latest-score-num chal-2-guess-display">--</p>
