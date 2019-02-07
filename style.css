@@ -62,6 +62,7 @@ label {
 
 main {
   height: 100%;
+  position: relative;
 }
 
 /*Layout style -------------------- */
@@ -252,6 +253,10 @@ main {
   font-weight: 300;
 }
 
+input:focus {
+  border-color: grey;
+}
+
 .input {
   background: #f5f6f8;
   border-right: 2px solid #aaaaaa;
@@ -397,12 +402,26 @@ main {
 /*Theme style -------------------- */
 
 /*Testing -------------------- */
-
-.mr-pb {
-    width: 100px;
-    animation: float 10s linear infinite;
+.pb-animation img {
+  position: absolute;
+  width: 300px;
+  top: -40px;
+  left: -400px;
+  z-index: 1;
 }
 
+.mr-pb {
+    animation: fly 4s linear;
+}
+
+@keyframes fly {
+  0% {
+      transform: translate(2000px, 0px);
+  }
+  100% {
+      transform: translate(-300px, 0px);
+  }
+}
 
 
 
