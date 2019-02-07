@@ -134,6 +134,7 @@ function onUpdateRange() {
 
   if (validRange(minInt, maxInt) && hasBothInputs() ) {
     resetBtn.disabled = false;
+    clearGuessFormErrs();
     startNewGame(minInt, maxInt);
   } else {
     showRngErr();
