@@ -119,6 +119,8 @@ function startNewGame(minInt, maxInt) {
   setRandom(minInt, maxInt);
 
   clearLatestScore();
+  clearGuessFormErrs();
+  clearRngErr();
 
   // Restart timer & number of guesses
   startTimer();
@@ -131,7 +133,6 @@ function onUpdateRange() {
   maxInt = parseInt(maxEl.value);
 
   if (validRange(minInt, maxInt) && hasBothInputs() ) {
-    clearRngErr();
     resetBtn.disabled = false;
     startNewGame(minInt, maxInt);
   } else {
@@ -297,7 +298,7 @@ function clearRngErr() {
   maxEl.classList.remove('error-border');
 }
 
-// Function checks for winner
+//Check guesses against random number for winners
 function checkForWinner(guess1, guess2) {
   if (guess1 == randomNum && guess2 == randomNum) {
     winnerName = "Tie Game!";
@@ -316,7 +317,7 @@ function checkForWinner(guess1, guess2) {
   }
 }
 
-// State whether guesses are too high or low
+//State whether guesses are too high or low
 function highOrLow(guess, text) {
   if (guess > randomNum) {
     text.innerText = "that's too high";
@@ -347,7 +348,6 @@ function gameWon() {
           </div>
         </section>`;
   cardTemplate.innerHTML += htmlText;
-
 
   minInt -= 10;
   maxInt += 10;
