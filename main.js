@@ -107,8 +107,8 @@ function setRandom(minimum, maximum) {
 // Starts a new game
 function startNewGame(minInt, maxInt) {
 
-  if (minInt < 0) {
-    minInt = 0;
+  if (minInt < 1) {
+    minInt = 1;
   }
 
   minEl.value = minInt;
