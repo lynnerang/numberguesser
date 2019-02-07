@@ -20,6 +20,7 @@
     </header>
 <!-- Main content -->
     <main class="l-flex">
+      <div class="pb-animation"><img src="images/mrpb.png"></div>
 <!-- Div of left side of page (input) -->
       <div class="input l-flex l-flex-dir l-flex-1">
 <!-- Section for set range -->
@@ -39,9 +40,9 @@
             </div>
           </div>
 <!-- Minimum range error -->
-          <div class="error-r pos-rel j-rng-err">
+          <div class="error-h pos-rel j-rng-err">
             <i class="fas fa-exclamation-triangle error-i"></i>
-            <p class="error-t js-range-txt">Minimum must be less than maximum</p>
+            <p class="error-t j-range-txt">Minimum must be less than maximum</p>
           </div>
         </section>
 <!-- Section for challengers -->
@@ -105,16 +106,18 @@
           <h3 class="marg-b-15">Latest Score</h3>
           <div class="l-flex l-flex-j-center" id="lat-scr-sec">
             <div class="latest-score l-flex-1">
-              <h4 class="marg-b-5 chal-1-name-display">Challenger 1 Name</h4>
+              <h4 class="marg-b-5 chal-1-name-display">--</h4>
               <p class="fnt-light">current guess</p>
-              <p class="latest-score-num chal-1-guess-display">0</p>
+              <p class="latest-score-num chal-1-guess-display">--</p>
               <p class="fnt-light fnt-hint chal-1-high-low">--</p>
             </div>
+            <div class="latest-score l-flex-1">
+              <h4 class="marg-b-5 chal-2-name-display">--</h4>
             <hr class="hr-ls">
             <div class="latest-score l-flex-1 marg-t-25">
-              <h4 class="marg-b-5 chal-2-name-display">Challenger 2 Name</h4>
+              <h4 class="marg-b-5 chal-2-name-display">--</h4>
               <p class="fnt-light">current guess</p>
-              <p class="latest-score-num chal-2-guess-display">0</p>
+              <p class="latest-score-num chal-2-guess-display">--</p>
               <p class="fnt-light fnt-hint chal-2-high-low">--</p>
             </div>
           </div>
