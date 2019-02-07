@@ -111,16 +111,16 @@ function startNewGame(minInt, maxInt) {
     minInt = 1;
   }
 
+  clearLatestScore();
+  clearGuessFormErrs();
+  clearRngErr();
+
   minEl.value = minInt;
   maxEl.value = maxInt;
   document.querySelector('.min-range-txt').innerText = minInt;
   document.querySelector('.max-range-txt').innerText = maxInt;
 
   setRandom(minInt, maxInt);
-
-  clearLatestScore();
-  clearGuessFormErrs();
-  clearRngErr();
 
   // Restart timer & number of guesses
   startTimer();
@@ -134,7 +134,6 @@ function onUpdateRange() {
 
   if (validRange(minInt, maxInt) && hasBothInputs() ) {
     resetBtn.disabled = false;
-    clearGuessFormErrs();
     startNewGame(minInt, maxInt);
   } else {
     showRngErr();
