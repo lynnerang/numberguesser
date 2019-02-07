@@ -156,7 +156,7 @@ function showRngErr() {
   if (!validRange(minInt, maxInt)) {
     rangeErrTxt.innerText = "Minimum must be less than maximum.";
   } else {
-    rangeErrTxt.innerText = "Enter both a minimum and maximum value.";
+    rangeErrTxt.innerText = "Enter both minimum and maximum values.";
   }
 }
 
@@ -208,7 +208,7 @@ function checkInputs(guessEl, errDiv) {
 //Displays errors for EACH guess not within min & max range
 function validateGuess(guessEl, errDiv) {
   if (parseInt(guessEl.value) < minInt || parseInt(guessEl.value) > maxInt) {
-    showInputErr(guessEl, errDiv, 'Please enter a number within the range.');
+    showInputErr(guessEl, errDiv, 'Enter a number within the range.');
     return false;
   } else {
     removeInputErr(guessEl, errDiv);
