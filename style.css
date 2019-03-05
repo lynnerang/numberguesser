@@ -318,6 +318,8 @@ input:focus {
 .output {
   background: #d1d2d4;
   overflow: scroll;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .pad-b-5 {
@@ -400,10 +402,6 @@ input:focus {
   border-top: solid 2px #eaeaea;
   border-bottom: solid 2px #eaeaea;
 }
-
-/** {
-  border: solid 1px red;
-}*/
 
 /*State style -------------------- */
 
@@ -534,6 +532,3 @@ input:focus {
     margin: 20px 20px;
   }
 }
-
-/*Theme style -------------------- */
-
