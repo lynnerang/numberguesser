@@ -136,13 +136,17 @@ $(document).ready(() => {
   }
 
   const checkForWinner = (guess1, guess2) => {
-    if (guess1 === randomNum && guess2 === randomNum) {
+    switch (true) {
+    case (guess1 === randomNum && guess2 === randomNum): 
       gameWon('Tie Game!');
-    } else if (guess1 === randomNum && guess2 !== randomNum) {
+      break;
+    case (guess1 === randomNum && guess2 !== randomNum): 
       gameWon(chal1Name.val());
-    } else if (guess1 !== randomNum && guess2 === randomNum) {
+      break;
+    case (guess1 !== randomNum && guess2 === randomNum): 
       gameWon(chal2Name.val());
-    } else {
+      break;
+    default:
       chal1Gss.val('');
       chal2Gss.val('');
       guessCount++;
@@ -150,12 +154,16 @@ $(document).ready(() => {
   }
 
   const showHighOrLow = (guess, txt) => {
-    if (guess > randomNum) {
-      txt.text("that's too high");
-    } else if (guess < randomNum) {
-      txt.text("that's too low");
-    } else if (guess === randomNum) {
-      txt.text('you guessed right!');
+    switch (true) {
+      case (guess > randomNum):
+        txt.text("that's too high");
+        break;
+      case (guess < randomNum):
+        txt.text("that's too low");
+        break;
+      case (guess === randomNum):
+        txt.text('you guessed right!');
+        break;
     }
   }
 
@@ -238,5 +246,4 @@ $(document).ready(() => {
   });
 
   startNewGame(1, 100);
-
 });
